@@ -122,7 +122,7 @@ public final class OpenAction extends AbstractAction implements ContextAwareActi
                 final String remote = GitUtils.getRemote(gitRepoDirectory, origin);
                 final RepoStrategy strategy = getStrategy(remote);
                 if (strategy != null) {
-                    putValue(NAME, MessageFormat.format("<html>Open <b>{0}</b> at <b>{1}</b>", remoteBranchName, strategy.getLabel()));
+                    putValue(NAME, MessageFormat.format("Open ''{0}'' at ''{1}''", remoteBranchName, strategy.getLabel()));
 
                     url = strategy.getUrl(remote, remoteName, activeBranch.getId());
                     setEnabled(null != url);
