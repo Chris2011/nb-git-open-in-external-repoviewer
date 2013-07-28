@@ -53,13 +53,9 @@ public final class OpenAction extends AbstractAction implements ContextAwareActi
     }
 
     static class ContextAction extends AbstractAction {
-        //TODO use ServiceLoader to lookup strategies
-
-        private final Lookup lkp;
         private String url = null;
 
         private ContextAction(Lookup lkp) {
-            this.lkp = lkp;
             putValue(NAME, null);
             putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
             init(lkp);
