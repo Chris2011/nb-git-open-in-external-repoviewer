@@ -5,7 +5,6 @@
  */
 package de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies;
 
-import de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies.GoogleCodeStrategyImpl;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 

@@ -5,8 +5,8 @@
  */
 package de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies;
 
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

@@ -5,9 +5,8 @@
  */
 package de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies;
 
-import de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies.GitWebStrategyImpl;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

@@ -15,39 +15,26 @@
  */
 package de.markiewb.netbeans.plugin.git.openinexternalviewer;
 
-import de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies.BitBucketStrategyImpl;
-import de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies.GitBlitStrategyImpl;
-import de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies.GitHubStrategyImpl;
-import de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies.GitWebStrategyImpl;
-import de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies.GoogleCodeStrategyImpl;
 import java.awt.event.ActionEvent;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import static javax.swing.Action.NAME;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import org.netbeans.api.project.Project;
 import org.netbeans.libs.git.GitBranch;
-import org.openide.awt.*;
+import org.openide.awt.ActionID;
+import org.openide.awt.ActionReference;
+import org.openide.awt.ActionReferences;
+import org.openide.awt.ActionRegistration;
+import org.openide.awt.DynamicMenuContent;
+import org.openide.awt.HtmlBrowser;
 import org.openide.filesystems.FileObject;
-import org.openide.nodes.Node;
 import org.openide.util.ContextAwareAction;
 import org.openide.util.Exceptions;
-import org.openide.util.HelpCtx;
 import org.openide.util.Lookup;
-import org.openide.util.NbBundle;
-import org.openide.util.actions.CookieAction;
-import org.openide.util.actions.Presenter;
 
 @ActionID(category = "Git", id = "de.markiewb.netbeans.plugin.git.openinexternalviewer.OpenAction")
 @ActionRegistration(lazy = false, displayName = "openinexternalviewer.OpenAction")

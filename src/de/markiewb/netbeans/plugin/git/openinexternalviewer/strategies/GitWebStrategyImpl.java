@@ -19,7 +19,6 @@ import de.markiewb.netbeans.plugin.git.openinexternalviewer.RepoStrategy;
 import java.text.MessageFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.netbeans.libs.git.GitBranch;
 import org.openide.util.lookup.ServiceProvider;
 
 /**
