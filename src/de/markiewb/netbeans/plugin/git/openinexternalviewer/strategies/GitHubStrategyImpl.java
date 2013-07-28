@@ -43,7 +43,6 @@ public final class GitHubStrategyImpl implements RepoStrategy {
             String repo = matcher.group(3);
             String username = null;
             url = MessageFormat.format("{0}://{1}/{2}/commits/{3}", protocol, server, repo, branchName);
-            System.out.println("url = " + url);
         }
         return url;
     }
