@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-OpenIDE-Module: open.in.external.repo.viewer
+OpenIDE-Module: open.url.of.git.repository.hoster
 OpenIDE-Module-Localizing-Bundle: de/markiewb/netbeans/plugin/git/openinexternalviewer/Bundle.properties
 OpenIDE-Module-Specification-Version: 1.2
 
