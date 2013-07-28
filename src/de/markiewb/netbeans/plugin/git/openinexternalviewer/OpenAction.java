@@ -58,8 +58,6 @@ public final class OpenAction extends AbstractAction implements ContextAwareActi
     static class ContextAction extends AbstractAction {
         //TODO use ServiceLoader to lookup strategies
 
-        private final Collection<RepoStrategy> strategies = Arrays.asList(new GitBlitStrategyImpl(), new GoogleCodeStrategyImpl(), new GitHubStrategyImpl(), new BitBucketStrategyImpl(), new GitWebStrategyImpl());
-
         private final Lookup lkp;
         private String url = null;
 
@@ -71,6 +69,7 @@ public final class OpenAction extends AbstractAction implements ContextAwareActi
         }
 
         private RepoStrategy getStrategy(String remote) {
+            Collection<? extends RepoStrategy> strategies = Lookup.getDefault().lookupAll(RepoStrategy.class);
             RepoStrategy usedStrategy = null;
             for (RepoStrategy strategy : strategies) {
                 boolean supported = strategy.supports(remote);

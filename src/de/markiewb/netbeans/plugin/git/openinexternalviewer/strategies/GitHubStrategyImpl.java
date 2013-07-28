@@ -10,6 +10,7 @@ import java.text.MessageFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.netbeans.libs.git.GitBranch;
+import org.openide.util.lookup.ServiceProvider;
 
 /**
  * https://github.com/markiewb/nb-git-branch-in-statusbar.git
@@ -17,6 +18,7 @@ import org.netbeans.libs.git.GitBranch;
  * <p>
  * @author markiewb
  */
+@ServiceProvider(service = RepoStrategy.class)
 public final class GitHubStrategyImpl implements RepoStrategy {
 
     private final Pattern p = Pattern.compile("(http|https)://(github.com)/(.+)(.git)");

@@ -10,11 +10,13 @@ import java.text.MessageFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.netbeans.libs.git.GitBranch;
+import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
  * @author markiewb
  */
+@ServiceProvider(service = RepoStrategy.class)
 public final class GoogleCodeStrategyImpl implements RepoStrategy {
 
     @Override

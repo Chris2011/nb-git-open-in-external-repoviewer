@@ -10,6 +10,7 @@ import java.text.MessageFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.netbeans.libs.git.GitBranch;
+import org.openide.util.lookup.ServiceProvider;
 
 /**
  * https://bitbucket.org/elbrecht/git-blog-examples.git
@@ -17,6 +18,7 @@ import org.netbeans.libs.git.GitBranch;
  * <p>
  * @author markiewb
  */
+@ServiceProvider(service = RepoStrategy.class)
 public final class BitBucketStrategyImpl implements RepoStrategy {
 
     private final Pattern p = Pattern.compile("(https)://(bitbucket.org)/(.+)(.git)");
