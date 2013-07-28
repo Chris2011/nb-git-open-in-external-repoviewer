@@ -25,12 +25,21 @@ import org.junit.Test;
 public class GoogleCodeStrategyImplTest {
 
     @Test
-    public void testGetUrl() {
+    public void testGetUrlWithoutUserName() {
         String remote = "https://code.google.com/p/gitblit/";
         String branchName = "bootstrap";
         String branchRevId = "1234";
         String result = new GoogleCodeStrategyImpl().getUrl(remote, branchName, branchRevId);
         String expResult = "https://code.google.com/p/gitblit/source/list?name=bootstrap";
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testGetUrlWithUserName() {
+        String remote = "https://john.doe@code.google.com/p/nb-close-other-projects/";
+        String branchName = "master";
+        String branchRevId = "1234";
+        String result = new GoogleCodeStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String expResult = "https://code.google.com/p/nb-close-other-projects/source/list?name=master";
         assertEquals(expResult, result);
     }
 

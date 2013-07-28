@@ -16,6 +16,9 @@
 package de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies;
 
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.RepoStrategy;
+import java.text.MessageFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.openide.util.lookup.ServiceProvider;
 
 /**
@@ -25,26 +28,33 @@ import org.openide.util.lookup.ServiceProvider;
 @ServiceProvider(service = RepoStrategy.class)
 public final class GoogleCodeStrategyImpl implements RepoStrategy {
 
+    // https://benno.markiewicz@code.google.com/p/nb-close-other-projects/
+    // https://code.google.com/p/gitblit/
+    
+        private final Pattern p = Pattern.compile("(http|https)://(.*?@)?(code\\.google\\.com)/p/(.+?)/");
+
     @Override
     public String getUrl(String remote, String branchName, String branchRevId) {
-        //origin/bootstrap at https://code.google.com/p/gitblit/
-        //https://code.google.com/p/gitblit/source/list?name=bootstrap
-        if (supports(remote)) {
-
-            if (this.supports(remote)) {
-                final String url = remote + "source/list?name=" + branchName;
-                System.out.println("url = " + url);
-                return url;
-            }
+        if (this.supports(remote)) {
+            Matcher matcher = p.matcher(remote);
+            matcher.find();
+            String protocol = matcher.group(1);
+            String username = matcher.group(2);
+            String server = matcher.group(3);
+            String repo = matcher.group(4);
+            return MessageFormat.format("{0}://{1}/p/{2}/source/list?name={3}", protocol, server, repo, branchName);
         }
         return null;
     }
 
     @Override
     public boolean supports(String remote) {
-        return remote.startsWith("https://code.google.com/p/");
+        return p.matcher(remote).matches();
     }
-
+    
+    
+    
+    
     @Override
     public String getLabel() {
         return "Google Code";
