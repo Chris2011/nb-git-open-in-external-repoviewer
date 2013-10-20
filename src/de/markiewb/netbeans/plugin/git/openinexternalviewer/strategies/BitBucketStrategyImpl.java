@@ -30,7 +30,7 @@ import org.openide.util.lookup.ServiceProvider;
 @ServiceProvider(service = RepoStrategy.class)
 public final class BitBucketStrategyImpl implements RepoStrategy {
 
-    private final Pattern p = Pattern.compile("(https)://(bitbucket.org)/(.+)(.git)");
+    private final Pattern p = Pattern.compile("(https)://(.*?@)?(bitbucket.org)/(.+)(.git)");
 
     @Override
     public String getUrl(String remote, String branchName, String branchRevId) {
@@ -39,9 +39,9 @@ public final class BitBucketStrategyImpl implements RepoStrategy {
             Matcher matcher = p.matcher(remote);
             matcher.find();
             String protocol = matcher.group(1);
-            String server = matcher.group(2);
-            String repo = matcher.group(3);
-            String username = null;
+            String username = matcher.group(2);
+            String server = matcher.group(3);
+            String repo = matcher.group(4);
             url = MessageFormat.format("{0}://{1}/{2}/commits/branch/{3}", protocol, server, repo, branchName);
             System.out.println("url = " + url);
         }
