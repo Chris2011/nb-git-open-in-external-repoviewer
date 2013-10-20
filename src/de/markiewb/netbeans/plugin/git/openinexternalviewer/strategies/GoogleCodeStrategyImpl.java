@@ -31,7 +31,7 @@ public final class GoogleCodeStrategyImpl implements RepoStrategy {
     // https://benno.markiewicz@code.google.com/p/nb-close-other-projects/
     // https://code.google.com/p/gitblit/
     
-        private final Pattern p = Pattern.compile("(http|https)://(.*?@)?(code\\.google\\.com)/p/(.+?)/");
+    private final Pattern p = Pattern.compile("(http|https)://(.*?@)?(code\\.google\\.com)/p/(.+?)/");
 
     @Override
     public String getUrl(String remote, String branchName, String branchRevId) {
