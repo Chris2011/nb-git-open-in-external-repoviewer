@@ -43,7 +43,6 @@ public final class GitWebStrategyImpl implements RepoStrategy {
             //https://devel.dolmen-project.org/dolmen.menu.git
             //http://gitweb.dolmen-project.org/dolmen.menu.git/shortlog/refs/heads/master
             url = MessageFormat.format("{0}://gitweb.{1}/{2}.git/shortlog/refs/heads/{3}", protocol, server, repo, branchName);
-            System.out.println("url = " + url);
         }
         return url;
     }

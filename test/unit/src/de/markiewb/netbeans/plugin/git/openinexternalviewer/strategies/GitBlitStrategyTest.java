@@ -25,7 +25,27 @@ import org.junit.Test;
 public class GitBlitStrategyTest {
 
     @Test
-    public void testGetUrl() {
+    public void testGetUrl_Category() {
+        String remote = "http://my.company.com/gitblit/git/category/my.complex.repo.git";
+        String branchName = "feature/feature42D";
+        String branchRevId = "1234";
+        String result = new GitBlitStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String expResult = "http://my.company.com/gitblit/log/category!my.complex.repo.git/refs!heads!feature!feature42D";
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testGetUrl_CategoryAndUsername() {
+        String remote = "http://user@my.company.com/gitblit/git/category/my.complex.repo.git";
+        String branchName = "feature/feature42D";
+        String branchRevId = "1234";
+        String result = new GitBlitStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String expResult = "http://my.company.com/gitblit/log/category!my.complex.repo.git/refs!heads!feature!feature42D";
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testGetUrl_Username() {
         String remote = "http://user@my.company.com/gitblit/git/category/my.complex.repo.git";
         String branchName = "feature/feature42D";
         String branchRevId = "1234";

@@ -22,7 +22,7 @@ import org.junit.Test;
  *
  * @author markiewb
  */
-public class GitHubBlitStrategyTest {
+public class GitHubStrategyImplTest {
 
     @Test
     public void testGetUrl() {
@@ -36,4 +36,15 @@ public class GitHubBlitStrategyTest {
         assertEquals(expResult, result);
     }
 
+    @Test
+    public void testGetUrl_Username() {
+
+        String remote = "https://markiewb@github.com/markiewb/nb-git-branch-in-statusbar.git";
+//        String branchName = "feature/feature42D";
+        String branchName = "master";
+        String branchRevId = "1234";
+        String result = new GitHubStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String expResult = "https://github.com/markiewb/nb-git-branch-in-statusbar/commits/master";
+        assertEquals(expResult, result);
+    }
 }
