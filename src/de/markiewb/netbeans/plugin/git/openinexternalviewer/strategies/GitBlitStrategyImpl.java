@@ -28,7 +28,7 @@ import org.openide.util.lookup.ServiceProvider;
 @ServiceProvider(service = RepoStrategy.class)
 public final class GitBlitStrategyImpl implements RepoStrategy {
 
-    private final Pattern p = Pattern.compile("(http|https)://(.*?@)?(.+?)/git/(.+.git)");
+    private final Pattern p = Pattern.compile("(?<protocol>http|https)://(?<username>.+?@)?(?<server>.+?)/git/(?<repo>.+)\\.git");
 
     @Override
     public String getUrl(String remote, String branchName, String branchRevId) {
@@ -36,12 +36,11 @@ public final class GitBlitStrategyImpl implements RepoStrategy {
         if (this.supports(remote)) {
             Matcher matcher = p.matcher(remote);
             matcher.find();
-            String protocol = matcher.group(1);
-            String username = matcher.group(2);
-            String server = matcher.group(3);
-            String repo = matcher.group(4);
-            url = MessageFormat.format("{0}://{1}/log/{2}/refs!heads!{3}", protocol, server, escape(repo), escape(branchName));
-            System.out.println("url = " + url);
+            String protocol = matcher.group("protocol");
+            String username = matcher.group("username");
+            String server = matcher.group("server");
+            String repo = matcher.group("repo");
+            url = MessageFormat.format("{0}://{1}/log/{2}.git/refs!heads!{3}", protocol, server, escape(repo), escape(branchName));
         }
         return url;
     }

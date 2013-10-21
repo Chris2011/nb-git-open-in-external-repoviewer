@@ -31,17 +31,17 @@ public final class GoogleCodeStrategyImpl implements RepoStrategy {
     // https://benno.markiewicz@code.google.com/p/nb-close-other-projects/
     // https://code.google.com/p/gitblit/
     
-        private final Pattern p = Pattern.compile("(http|https)://(.*?@)?(code\\.google\\.com)/p/(.+?)/");
+    private final Pattern p = Pattern.compile("(?<protocol>http|https)://(?<username>.*?)@?(?<server>code\\.google\\.com)/p/(?<repo>.+?)/");
 
     @Override
     public String getUrl(String remote, String branchName, String branchRevId) {
         if (this.supports(remote)) {
             Matcher matcher = p.matcher(remote);
             matcher.find();
-            String protocol = matcher.group(1);
-            String username = matcher.group(2);
-            String server = matcher.group(3);
-            String repo = matcher.group(4);
+            String protocol = matcher.group("protocol");
+            String username = matcher.group("username");
+            String server = matcher.group("server");
+            String repo = matcher.group("repo");
             return MessageFormat.format("{0}://{1}/p/{2}/source/list?name={3}", protocol, server, repo, branchName);
         }
         return null;
