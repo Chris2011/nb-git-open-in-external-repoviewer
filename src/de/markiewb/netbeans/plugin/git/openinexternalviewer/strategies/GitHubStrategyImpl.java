@@ -24,7 +24,7 @@ import org.openide.util.lookup.ServiceProvider;
 /**
  * https://github.com/markiewb/nb-git-branch-in-statusbar.git
  * https://github.com/markiewb/nb-git-branch-in-statusbar/commits/master
- * <p>
+ *
  * @author markiewb
  */
 @ServiceProvider(service = RepoStrategy.class)
