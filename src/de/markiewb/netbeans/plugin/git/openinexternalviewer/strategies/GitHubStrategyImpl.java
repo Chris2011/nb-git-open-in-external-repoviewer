@@ -45,7 +45,7 @@ public final class GitHubStrategyImpl implements RepoStrategy {
             try {
                 protocol = matcher.group("protocol");
             }
-            catch (IndexOutOfBoundsException e) {
+            catch (IllegalArgumentException e) {
                 // Do nothing, but use default "https".
             }
             String username = matcher.group("username");
