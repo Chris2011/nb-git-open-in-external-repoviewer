@@ -41,9 +41,9 @@ public final class GitHubStrategyImpl implements RepoStrategy {
             Pattern p = this.getMatchingPattern(remote);
             Matcher matcher = p.matcher(remote);
             matcher.find();
-            String protocol = "https";   
+            String protocol = "https";
             try {
-                String protocol = matcher.group("protocol");
+                protocol = matcher.group("protocol");
             }
             catch (IndexOutOfBoundsException e) {
                 // Do nothing, but use default "https".
