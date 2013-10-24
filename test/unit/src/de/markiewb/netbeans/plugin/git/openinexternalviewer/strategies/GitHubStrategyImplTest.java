@@ -25,7 +25,7 @@ import org.junit.Test;
 public class GitHubStrategyImplTest {
 
     @Test
-    public void testGetUrl() {
+    public void testGetUrlHttps() {
 
         String remote = "https://github.com/markiewb/nb-git-branch-in-statusbar.git";
 //        String branchName = "feature/feature42D";
@@ -37,7 +37,19 @@ public class GitHubStrategyImplTest {
     }
 
     @Test
-    public void testGetUrl_Username() {
+    public void testGetUrlGit() {
+
+        String remote = "git@github.com:markiewb/nb-git-branch-in-statusbar.git";
+//        String branchName = "feature/feature42D";
+        String branchName = "master";
+        String branchRevId = "1234";
+        String result = new GitHubStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String expResult = "https://github.com/markiewb/nb-git-branch-in-statusbar/commits/master";
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testGetUrlHttps_Username() {
 
         String remote = "https://markiewb@github.com/markiewb/nb-git-branch-in-statusbar.git";
 //        String branchName = "feature/feature42D";

@@ -22,19 +22,19 @@ import java.util.regex.Pattern;
 import org.openide.util.lookup.ServiceProvider;
 
 /**
+ * https://benno.markiewicz@code.google.com/p/nb-close-other-projects/
+ * https://code.google.com/p/gitblit/
  *
  * @author markiewb
  */
 @ServiceProvider(service = RepoStrategy.class)
 public final class GoogleCodeStrategyImpl implements RepoStrategy {
 
-    // https://benno.markiewicz@code.google.com/p/nb-close-other-projects/
-    // https://code.google.com/p/gitblit/
-    
     private final Pattern p = Pattern.compile("(?<protocol>http|https)://(?<username>.*?)@?(?<server>code\\.google\\.com)/p/(?<repo>.+?)/");
 
     @Override
     public String getUrl(String remote, String branchName, String branchRevId) {
+        String url = null;
         if (this.supports(remote)) {
             Matcher matcher = p.matcher(remote);
             matcher.find();
@@ -42,18 +42,15 @@ public final class GoogleCodeStrategyImpl implements RepoStrategy {
             String username = matcher.group("username");
             String server = matcher.group("server");
             String repo = matcher.group("repo");
-            return MessageFormat.format("{0}://{1}/p/{2}/source/list?name={3}", protocol, server, repo, branchName);
+            url = MessageFormat.format("{0}://{1}/p/{2}/source/list?name={3}", protocol, server, repo, branchName);
         }
-        return null;
+        return url;
     }
 
     @Override
     public boolean supports(String remote) {
         return p.matcher(remote).matches();
     }
-    
-    
-    
     
     @Override
     public String getLabel() {

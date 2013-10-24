@@ -24,21 +24,30 @@ import org.openide.util.lookup.ServiceProvider;
 /**
  * https://github.com/markiewb/nb-git-branch-in-statusbar.git
  * https://github.com/markiewb/nb-git-branch-in-statusbar/commits/master
- * <p>
+ * git@github.com:markiewb/nb-git-branch-in-statusbar.git
+ *
  * @author markiewb
  */
 @ServiceProvider(service = RepoStrategy.class)
 public final class GitHubStrategyImpl implements RepoStrategy {
 
-    private final Pattern p = Pattern.compile("(?<protocol>http|https)://(?<username>.+?@)?(?<server>github.com)/(?<repo>.+)\\.git");
+    private final Pattern pHttp = Pattern.compile("(?<protocol>http|https)://(?<username>.+?@)?(?<server>github.com)/(?<repo>.+)\\.git");
+    private final Pattern pGit = Pattern.compile("(?<username>git)@(?<server>github.com):(?<repo>.+)\\.git");
 
     @Override
     public String getUrl(String remote, String branchName, String branchRevId) {
         String url = null;
         if (this.supports(remote)) {
+            Pattern p = this.getMatchingPattern(remote);
             Matcher matcher = p.matcher(remote);
             matcher.find();
-            String protocol = matcher.group("protocol");
+            String protocol = "https";
+            try {
+                protocol = matcher.group("protocol");
+            }
+            catch (IllegalArgumentException e) {
+                // Do nothing, but use default "https".
+            }
             String username = matcher.group("username");
             String server = matcher.group("server");
             String repo = matcher.group("repo");
@@ -49,12 +58,22 @@ public final class GitHubStrategyImpl implements RepoStrategy {
 
     @Override
     public boolean supports(String remote) {
-        return p.matcher(remote).matches();
+        return (pHttp.matcher(remote).matches() || pGit.matcher(remote).matches());
     }
 
     @Override
     public String getLabel() {
         return "GitHub";
+    }
+
+    protected Pattern getMatchingPattern(String remote) {
+        if (pHttp.matcher(remote).matches()) {
+            return pHttp;
+        }
+        else if (pGit.matcher(remote).matches()) {
+            return pGit;
+        }
+        return null;
     }
 
 }

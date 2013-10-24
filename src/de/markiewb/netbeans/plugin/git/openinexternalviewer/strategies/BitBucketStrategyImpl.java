@@ -24,7 +24,7 @@ import org.openide.util.lookup.ServiceProvider;
 /**
  * https://bitbucket.org/elbrecht/git-blog-examples.git
  * https://bitbucket.org/elbrecht/git-blog-examples/commits/branch/master
- * <p>
+ *
  * @author markiewb
  */
 @ServiceProvider(service = RepoStrategy.class)
