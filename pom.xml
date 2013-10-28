@@ -142,6 +142,7 @@
 
 &lt;h2&gt;Updates in 1.3.1:&lt;/h2&gt;
 &lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/5"&gt;Issue 5&lt;/a&gt;]: Fixed StringIndexOutOfBoundsException when opening the project's context menu&lt;/li&gt;
+&lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/6"&gt;Issue 6&lt;/a&gt;]: Add position attribute to action to prevent warning in the log&lt;/li&gt;
 
 
 &lt;h2&gt;Updates in 1.3:&lt;/h2&gt;
