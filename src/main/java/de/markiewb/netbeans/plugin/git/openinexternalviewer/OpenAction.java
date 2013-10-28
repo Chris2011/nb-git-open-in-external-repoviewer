@@ -39,7 +39,7 @@ import org.openide.util.Lookup;
 @ActionID(category = "Git", id = "de.markiewb.netbeans.plugin.git.openinexternalviewer.OpenAction")
 @ActionRegistration(lazy = false, displayName = "openinexternalviewer.OpenAction")
 @ActionReferences({
-    @ActionReference(path = "Projects/Actions")
+    @ActionReference(path = "Projects/Actions", position = 500)
 })
 public final class OpenAction extends AbstractAction implements ContextAwareAction {
 
