@@ -92,7 +92,7 @@ public final class OpenAction extends AbstractAction implements ContextAwareActi
             if (lookupAll != null && lookupAll.size() >= 2) {
                 return;
             }
-            
+
             Project project = lkp.lookup(Project.class);
             FileObject gitRepoDirectory = GitUtils.getGitRepoDirectory(project.getProjectDirectory());
             if (gitRepoDirectory == null) {
@@ -108,18 +108,21 @@ public final class OpenAction extends AbstractAction implements ContextAwareActi
                 return;
             } else {
                 final String remoteBranchName = activeBranch.getTrackedBranch().getName();
-                final String origin = remoteBranchName.substring(0, remoteBranchName.indexOf("/"));
-                final String remoteName = remoteBranchName.substring(remoteBranchName.indexOf("/") + 1);
+                //split "origin/master" to "origin" "master"
+                String[] split = remoteBranchName.split("/");
+                if (2 == split.length) {
+                    final String origin = split[0];
+                    final String remoteName = split[1];
 
-                final String remote = GitUtils.getRemote(gitRepoDirectory, origin);
-                final RepoStrategy strategy = getStrategy(remote);
-                if (strategy != null) {
-                    putValue(NAME, MessageFormat.format("Open ''{0}'' at ''{1}''", remoteBranchName, strategy.getLabel()));
+                    final String remote = GitUtils.getRemote(gitRepoDirectory, origin);
+                    final RepoStrategy strategy = getStrategy(remote);
+                    if (strategy != null) {
+                        putValue(NAME, MessageFormat.format("Open ''{0}'' at ''{1}''", remoteBranchName, strategy.getLabel()));
 
-                    url = strategy.getUrl(remote, remoteName, activeBranch.getId());
-                    setEnabled(null != url);
+                        url = strategy.getUrl(remote, remoteName, activeBranch.getId());
+                        setEnabled(null != url);
+                    }
                 }
-
             }
         }
 
