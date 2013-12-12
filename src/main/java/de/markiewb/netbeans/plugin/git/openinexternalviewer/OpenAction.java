@@ -109,10 +109,17 @@ public final class OpenAction extends AbstractAction implements ContextAwareActi
             } else {
                 final String remoteBranchName = activeBranch.getTrackedBranch().getName();
                 //split "origin/master" to "origin" "master"
-                String[] split = remoteBranchName.split("/");
-                if (2 == split.length) {
-                    final String origin = split[0];
-                    final String remoteName = split[1];
+                //split "orgin/feature/myfeature" to "origin" "feature/myfeature"
+                int indexOf = remoteBranchName.indexOf("/");
+                if (indexOf<=0 || remoteBranchName.startsWith("/") || remoteBranchName.endsWith("/")){
+                    // no slash found OR
+                    // slash is the first char? NOGO
+                    //slash at the end? NOGO
+                    return;
+                }
+                {
+                    final String origin = remoteBranchName.substring(0, indexOf);
+                    final String remoteName = remoteBranchName.substring(indexOf + 1);
 
                     final String remote = GitUtils.getRemote(gitRepoDirectory, origin);
                     final RepoStrategy strategy = getStrategy(remote);
