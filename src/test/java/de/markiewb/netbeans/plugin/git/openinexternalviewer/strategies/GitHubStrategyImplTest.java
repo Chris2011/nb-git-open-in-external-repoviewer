@@ -37,6 +37,18 @@ public class GitHubStrategyImplTest {
     }
 
     @Test
+    public void testGetUrlHttps_WithoutGitPostfix() {
+
+        String remote = "https://github.com/markiewb/nb-git-branch-in-statusbar";
+//        String branchName = "feature/feature42D";
+        String branchName = "master";
+        String branchRevId = "1234";
+        String result = new GitHubStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String expResult = "https://github.com/markiewb/nb-git-branch-in-statusbar/commits/master";
+        assertEquals(expResult, result);
+    }
+
+    @Test
     public void testGetUrlGit() {
 
         String remote = "git@github.com:markiewb/nb-git-branch-in-statusbar.git";

@@ -140,14 +140,22 @@
 
 &lt;p&gt;Currently supported patterns: GitBlit, BitBucket, GitHub, GoogleCode, GitWeb&lt;/p&gt;
 
+
+&lt;h2&gt;Updates in 1.3.3:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/8"&gt;Issue 8&lt;/a&gt;]: Fixed: Github: Remote URLs without ".git" postfix are not supported&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h2&gt;Updates in 1.3.2:&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/7"&gt;Issue 7&lt;/a&gt;]: Fixed: Branchnames with slashes are not supported&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2&gt;Updates in 1.3.1:&lt;/h2&gt;
+&lt;ul&gt;
 &lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/5"&gt;Issue 5&lt;/a&gt;]: Fixed StringIndexOutOfBoundsException when opening the project's context menu&lt;/li&gt;
 &lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/6"&gt;Issue 6&lt;/a&gt;]: Add position attribute to action to prevent warning in the log&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2&gt;Updates in 1.3:&lt;/h2&gt;
 &lt;ul&gt;

@@ -31,7 +31,9 @@ import org.openide.util.lookup.ServiceProvider;
 @ServiceProvider(service = RepoStrategy.class)
 public final class GitHubStrategyImpl implements RepoStrategy {
 
-    private final Pattern pHttp = Pattern.compile("(?<protocol>http|https)://(?<username>.+?@)?(?<server>github.com)/(?<repo>.+)\\.git");
+    private final Pattern pHttpP1 = Pattern.compile("(?<protocol>http|https)://(?<username>.+?@)?(?<server>github.com)/(?<repo>.+)\\.git");
+    //HACK could not express as regex, that is why I split it into two separate ones
+    private final Pattern pHttpP2 = Pattern.compile("(?<protocol>http|https)://(?<username>.+?@)?(?<server>github.com)/(?<repo>.+)");
     private final Pattern pGit = Pattern.compile("(?<username>git)@(?<server>github.com):(?<repo>.+)\\.git");
 
     @Override
@@ -58,7 +60,8 @@ public final class GitHubStrategyImpl implements RepoStrategy {
 
     @Override
     public boolean supports(String remote) {
-        return (pHttp.matcher(remote).matches() || pGit.matcher(remote).matches());
+        return getMatchingPattern(remote)!=null;
+//        return ( (remote.endsWith(".git") && pHttpP1.matcher(remote).matches()) ||(!remote.endsWith(".git") && pHttpP2.matcher(remote).matches()) ||pGit.matcher(remote).matches());
     }
 
     @Override
@@ -67,8 +70,11 @@ public final class GitHubStrategyImpl implements RepoStrategy {
     }
 
     protected Pattern getMatchingPattern(String remote) {
-        if (pHttp.matcher(remote).matches()) {
-            return pHttp;
+        if (remote.endsWith(".git") && pHttpP1.matcher(remote).matches()) {
+            return pHttpP1;
+        }
+        if (!remote.endsWith(".git") && pHttpP2.matcher(remote).matches()) {
+            return pHttpP2;
         }
         else if (pGit.matcher(remote).matches()) {
             return pGit;
