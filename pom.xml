@@ -107,6 +107,7 @@
                     <author>Benno Markiewicz (benno.markiewicz@googlemail.com) and contributors</author>
                     <homePageUrl>https://github.com/markiewb/nb-git-open-in-external-repoviewer</homePageUrl>
                     <keystore>nbproject/private/keystore</keystore>
+                    <keystorealias>myself</keystorealias>
                     <licenseName>Apache 2.0</licenseName>
                 </configuration>
             </plugin>
