@@ -8,7 +8,9 @@
     <packaging>nbm</packaging>
 
     <name>Open URL of GIT repository hoster</name>
-
+    <scm>
+        <developerConnection>scm:git:https://github.com/markiewb/nb-git-open-in-external-repoviewer</developerConnection>
+    </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
