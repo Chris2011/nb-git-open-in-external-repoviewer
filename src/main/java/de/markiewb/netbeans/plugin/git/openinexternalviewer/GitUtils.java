@@ -55,18 +55,37 @@ public class GitUtils {
         }
         return Collections.emptyList();
     }
+    /**
+     *
+     * @param f
+     * @param remoteName remote like "origin"
+     * @return
+     */
     public static String getRemote(final FileObject f, String remoteName) {
         final FileObject gitRepoDirectory = getGitRepoDirectory(f);
         if (null == gitRepoDirectory) {
             return null;
         }
         GitRepository repo = GitRepository.getInstance(FileUtil.toFile(gitRepoDirectory));
+        if (null == repo) {
+            return null;
+        }
         GitClient client = null;
         try {
             client = repo.createClient();
             ProgressMonitor progressMonitor = new ProgressMonitor.DefaultProgressMonitor();
-            Map<String, GitRemoteConfig> remotes = client.getRemotes(progressMonitor);
-            final List<String> uris = remotes.get(remoteName).getUris();
+            final Map<String, GitRemoteConfig> remotes = client.getRemotes(progressMonitor);
+            if (null == remotes) {
+                return null;
+            }
+            final GitRemoteConfig config = remotes.get(remoteName);
+            if (null == config) {
+                return null;
+            }
+            final List<String> uris = config.getUris();
+            if (null == uris) {
+                return null;
+            }
             return uris.get(0);
             
         } catch (GitException ex) {
@@ -97,5 +116,5 @@ public class GitUtils {
         }
         return null;
     }
-    
+
 }
