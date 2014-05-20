@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/markiewb/nb-git-open-in-external-repoviewer.svg?branch=master)](https://travis-ci.org/markiewb/nb-git-open-in-external-repoviewer)
+
 nb-git-open-in-external-repoviewer
 ==================================
 
