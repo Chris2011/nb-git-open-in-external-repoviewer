@@ -4,7 +4,7 @@
 
     <groupId>de.markiewb.netbeans.plugins</groupId>
     <artifactId>open.url.of.git.repository.hoster</artifactId>
-    <version>1.3.5-SNAPSHOT</version>
+    <version>1.3.5</version>
     <packaging>nbm</packaging>
 
     <name>Open URL of GIT repository hoster</name>
