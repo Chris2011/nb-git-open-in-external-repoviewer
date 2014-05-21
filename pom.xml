@@ -144,6 +144,11 @@
 &lt;p&gt;Currently supported patterns: GitBlit, BitBucket, GitHub, GoogleCode, GitWeb&lt;/p&gt;
 
 
+&lt;h2&gt;Updates in 1.3.5:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/10"&gt;Issue 10&lt;/a&gt;]: Fixed: Make query of strategies failsafe&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h2&gt;Updates in 1.3.4:&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/9"&gt;Issue 9&lt;/a&gt;]: Fixed: NullPointerException at GitUtils.getRemote&lt;/li&gt;
