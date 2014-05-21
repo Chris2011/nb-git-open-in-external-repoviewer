@@ -20,6 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.Collection;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import static javax.swing.Action.NAME;
@@ -43,6 +44,8 @@ import org.openide.util.Lookup;
 })
 public final class OpenAction extends AbstractAction implements ContextAwareAction {
 
+    private static final Logger LOG = Logger.getLogger(ContextAction.class.getName());
+    
     @Override
     public void actionPerformed(ActionEvent e) {
     }
@@ -65,7 +68,13 @@ public final class OpenAction extends AbstractAction implements ContextAwareActi
             Collection<? extends RepoStrategy> strategies = Lookup.getDefault().lookupAll(RepoStrategy.class);
             RepoStrategy usedStrategy = null;
             for (RepoStrategy strategy : strategies) {
-                boolean supported = strategy.supports(remote);
+                boolean supported;
+                try {
+                    supported = strategy.supports(remote);
+                } catch (Exception e) {
+                    LOG.warning(String.format("caught exception while calling strategy %s with %s :\n%s", strategy, remote, e));
+                    supported = false;
+                }
                 if (supported) {
                     usedStrategy = strategy;
                     break;
