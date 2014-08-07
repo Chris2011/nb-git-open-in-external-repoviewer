@@ -134,6 +134,11 @@
                     <useDefaultManifestFile>true</useDefaultManifestFile>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.15</version>
+            </plugin>
         </plugins>
     </build>
     <description>This plugins adds an new action "&lt;i&gt;Open 'origin/branchname' at 'XXX&lt;/i&gt;' to the context menu of a GIT-versioned project.

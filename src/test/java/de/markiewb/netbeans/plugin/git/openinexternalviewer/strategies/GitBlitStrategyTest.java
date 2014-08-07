@@ -63,4 +63,14 @@ public class GitBlitStrategyTest {
         String expResult = "https://demo-gitblit.rhcloud.com/log/gitblit.git/refs!heads!gh-pages";
         assertEquals(expResult, result);
     }
+    
+    @Test
+    public void testGetUrl3() {
+        String remote = "http://user@server.de/gitblit/r/category/anothercategory/my.repo.is.this.git";
+        String branchName = "gh-pages";
+        String branchRevId = "42D";
+        String result = new GitBlitStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String expResult = "???";
+        assertEquals(expResult, result);
+    }
 }
