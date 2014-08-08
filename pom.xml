@@ -134,6 +134,11 @@
                     <useDefaultManifestFile>true</useDefaultManifestFile>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.15</version>
+            </plugin>
         </plugins>
     </build>
     <description>This plugins adds an new action "&lt;i&gt;Open 'origin/branchname' at 'XXX&lt;/i&gt;' to the context menu of a GIT-versioned project.
@@ -143,6 +148,11 @@
 
 &lt;p&gt;Currently supported patterns: GitBlit, BitBucket, GitHub, GoogleCode, GitWeb&lt;/p&gt;
 
+
+&lt;h2&gt;Updates in 1.3.6:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/19"&gt;Issue 19&lt;/a&gt;]: Fixed: Pattern for Gitblit does not work&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2&gt;Updates in 1.3.5:&lt;/h2&gt;
 &lt;ul&gt;
