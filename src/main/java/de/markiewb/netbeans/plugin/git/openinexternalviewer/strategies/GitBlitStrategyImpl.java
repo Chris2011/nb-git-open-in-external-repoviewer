@@ -28,7 +28,7 @@ import org.openide.util.lookup.ServiceProvider;
 @ServiceProvider(service = RepoStrategy.class)
 public final class GitBlitStrategyImpl implements RepoStrategy {
 
-    private final Pattern p = Pattern.compile("(?<protocol>http|https)://(?<username>.+?@)?(?<server>.+?)/git/(?<repo>.+)\\.git");
+    private final Pattern p = Pattern.compile("(?<protocol>http|https)://(?<username>.+?@)?(?<server>.+?)/(git|r)/(?<repo>.+)\\.git");
 
     @Override
     public String getUrl(String remote, String branchName, String branchRevId) {
