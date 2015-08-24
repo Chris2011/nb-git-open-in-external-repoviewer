@@ -4,7 +4,7 @@
 
     <groupId>de.markiewb.netbeans.plugins</groupId>
     <artifactId>open.url.of.git.repository.hoster</artifactId>
-    <version>1.3.7-SNAPSHOT</version>
+    <version>1.3.7</version>
     <packaging>nbm</packaging>
 
     <name>Open URL of GIT repository hoster</name>
@@ -149,6 +149,11 @@
 &lt;p&gt;Currently supported patterns: GitBlit, BitBucket, GitHub, GoogleCode, GitWeb&lt;/p&gt;
 
 
+&lt;h2&gt;Updates in 1.3.7:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/21"&gt;Issue 21&lt;/a&gt;]: Support git@bitbucket.org style of repository definition (PR by @mkleint)&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h2&gt;Updates in 1.3.6:&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/19"&gt;Issue 19&lt;/a&gt;]: Fixed: Pattern for Gitblit does not work&lt;/li&gt;
@@ -195,7 +200,9 @@
 &lt;li&gt;Multiple selected projects&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/p&gt;
-&lt;p&gt;Provide defects, request for enhancements (f.e. new patterns) and feedback at &lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues"&gt;https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Compatible to &gt;=NB 7.3&lt;/p&gt;
+&lt;p&gt;Provide defects, request for enhancements (f.e. new patterns) and feedback at &lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues"&gt;https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=K4CMP92RZELE2"&gt;&lt;img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" alt="btn_donate_SM.gif"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Compatible to &gt;=NB 7.3&lt;/p&gt;
 &lt;p&gt;Legal disclaimer: Code is licensed under Apache 2.0. The names of the GIT repository hosters are trademarks of their owners. I am not affiliated with any of these owners nor endorsed by them.&lt;/p&gt;
 </description>
 </project>
