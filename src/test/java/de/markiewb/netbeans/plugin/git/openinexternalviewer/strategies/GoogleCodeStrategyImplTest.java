@@ -15,6 +15,7 @@
  */
 package de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies;
 
+import de.markiewb.netbeans.plugin.git.openinexternalviewer.RepoStrategy;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -25,20 +26,20 @@ import org.junit.Test;
 public class GoogleCodeStrategyImplTest {
 
     @Test
-    public void testGetUrlWithoutUserName() {
+    public void testGetOpenUrlWithoutUserName() {
         String remote = "https://code.google.com/p/gitblit/";
         String branchName = "bootstrap";
         String branchRevId = "1234";
-        String result = new GoogleCodeStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String result = new GoogleCodeStrategyImpl().getUrl(RepoStrategy.Type.OPEN, remote, branchName, branchRevId);
         String expResult = "https://code.google.com/p/gitblit/source/list?name=bootstrap";
         assertEquals(expResult, result);
     }
     @Test
-    public void testGetUrlWithUserName() {
+    public void testGetOpenUrlWithUserName() {
         String remote = "https://john.doe@code.google.com/p/nb-close-other-projects/";
         String branchName = "master";
         String branchRevId = "1234";
-        String result = new GoogleCodeStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String result = new GoogleCodeStrategyImpl().getUrl(RepoStrategy.Type.OPEN, remote, branchName, branchRevId);
         String expResult = "https://code.google.com/p/nb-close-other-projects/source/list?name=master";
         assertEquals(expResult, result);
     }

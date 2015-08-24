@@ -25,6 +25,9 @@ import org.openide.util.lookup.ServiceProvider;
  * https://bitbucket.org/elbrecht/git-blog-examples.git
  * https://bitbucket.org/elbrecht/git-blog-examples/commits/branch/master
  *
+ * https://www.bitbucket.org/elbrecht/git-blog-examples/pull-request/new?source=elbrecht/git-blog-examples::branch_name
+ * https://gist.github.com/pitr/8242ac5253a72ddf3838
+ *
  * @author markiewb
  */
 @ServiceProvider(service = RepoStrategy.class)
@@ -34,9 +37,9 @@ public final class BitBucketStrategyImpl implements RepoStrategy {
     private final Pattern pGit = Pattern.compile("(?<username>git)@(?<server>bitbucket.org):(?<repo>.+)\\.git");
 
     @Override
-    public String getUrl(String remote, String branchName, String branchRevId) {
+    public String getUrl(RepoStrategy.Type type, String remote, String branchName, String branchRevId) {
         String url = null;
-        if (this.supports(remote)) {
+        if (this.supports(type, remote)) {
             Matcher matcher = p.matcher(remote);
             if (matcher.find()) {
                 String protocol = matcher.group("protocol");
@@ -55,7 +58,7 @@ public final class BitBucketStrategyImpl implements RepoStrategy {
     }
 
     @Override
-    public boolean supports(String remote) {
+    public boolean supports(RepoStrategy.Type type, String remote) {
         return p.matcher(remote).matches() || pGit.matcher(remote).matches();
     }
 

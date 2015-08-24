@@ -70,7 +70,7 @@ public final class OpenAction extends AbstractAction implements ContextAwareActi
             for (RepoStrategy strategy : strategies) {
                 boolean supported;
                 try {
-                    supported = strategy.supports(remote);
+                    supported = strategy.supports(RepoStrategy.Type.OPEN, remote);
                 } catch (Exception e) {
                     LOG.warning(String.format("caught exception while calling strategy %s with %s :\n%s", strategy, remote, e));
                     supported = false;
@@ -135,7 +135,7 @@ public final class OpenAction extends AbstractAction implements ContextAwareActi
                     if (strategy != null) {
                         putValue(NAME, MessageFormat.format("Open ''{0}'' at ''{1}''", remoteBranchName, strategy.getLabel()));
 
-                        url = strategy.getUrl(remote, remoteName, activeBranch.getId());
+                        url = strategy.getUrl(RepoStrategy.Type.OPEN, remote, remoteName, activeBranch.getId());
                         setEnabled(null != url);
                     }
                 }

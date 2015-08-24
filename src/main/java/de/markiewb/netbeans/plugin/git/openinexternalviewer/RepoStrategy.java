@@ -17,9 +17,13 @@ package de.markiewb.netbeans.plugin.git.openinexternalviewer;
 
 public interface RepoStrategy {
 
-    String getUrl(String remote, String branchName, String branchRevId);
+    public enum Type {
+        OPEN, PULL_REQUEST
+    }
 
-    boolean supports(String remote);
+    String getUrl(RepoStrategy.Type type, String remote, String branchName, String branchRevId);
+
+    boolean supports(RepoStrategy.Type type, String remote);
     
     String getLabel();
 }
