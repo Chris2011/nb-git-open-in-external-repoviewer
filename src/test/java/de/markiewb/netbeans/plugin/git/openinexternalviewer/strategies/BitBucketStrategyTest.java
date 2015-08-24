@@ -61,4 +61,16 @@ public class BitBucketStrategyTest {
         assertEquals(expResult, result);
     }
 
+
+    @Test
+    public void testGetPRUrlSsh() {
+
+        String remote = "git@bitbucket.org:elbrecht/git-blog-examples.git";
+        String branchName = "branch1";
+        String branchRevId = "1234";
+        String result = new BitBucketStrategyImpl().getUrl(RepoStrategy.Type.PULL_REQUEST, remote, branchName, branchRevId);
+        String expResult = "https://bitbucket.org/elbrecht/git-blog-examples/pull-request/new?source=elbrecht/git-blog-examples::branch1";
+        assertEquals(expResult, result);
+    }
+
 }

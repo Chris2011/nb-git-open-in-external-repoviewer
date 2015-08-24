@@ -45,16 +45,26 @@ public final class BitBucketStrategyImpl implements RepoStrategy {
                 String protocol = matcher.group("protocol");
                 String server = matcher.group("server");
                 String repo = matcher.group("repo");
-                url = MessageFormat.format("{0}://{1}/{2}/commits/branch/{3}", protocol, server, repo, branchName);
+                url = MessageFormat.format(formatForType(type), protocol, server, repo, branchName);
             } else {
                 matcher = pGit.matcher(remote);
                 matcher.find();
                 String server = matcher.group("server");
                 String repo = matcher.group("repo");
-                url = MessageFormat.format("https://{0}/{1}/commits/branch/{2}", server, repo, branchName);
+                url = MessageFormat.format(formatForType(type), "https", server, repo, branchName);
             }
         }
         return url;
+    }
+
+    private String formatForType(RepoStrategy.Type type) {
+        if (RepoStrategy.Type.OPEN.equals(type)) {
+            return "{0}://{1}/{2}/commits/branch/{3}";
+        }
+        if (RepoStrategy.Type.PULL_REQUEST.equals(type)) {
+            return "{0}://{1}/{2}/pull-request/new?source={2}::{3}";
+        }
+        throw new IllegalStateException("unknown RepoStrategy.type:" + type);
     }
 
     @Override
