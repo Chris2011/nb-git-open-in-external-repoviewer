@@ -31,25 +31,32 @@ import org.openide.util.lookup.ServiceProvider;
 public final class BitBucketStrategyImpl implements RepoStrategy {
 
     private final Pattern p = Pattern.compile("(?<protocol>https)://(?<username>.+?@)?(?<server>bitbucket.org)/(?<repo>.+)\\.git");
+    private final Pattern pGit = Pattern.compile("(?<username>git)@(?<server>bitbucket.org):(?<repo>.+)\\.git");
 
     @Override
     public String getUrl(String remote, String branchName, String branchRevId) {
         String url = null;
         if (this.supports(remote)) {
             Matcher matcher = p.matcher(remote);
-            matcher.find();
-            String protocol = matcher.group("protocol");
-            String username = matcher.group("username");
-            String server = matcher.group("server");
-            String repo = matcher.group("repo");
-            url = MessageFormat.format("{0}://{1}/{2}/commits/branch/{3}", protocol, server, repo, branchName);
+            if (matcher.find()) {
+                String protocol = matcher.group("protocol");
+                String server = matcher.group("server");
+                String repo = matcher.group("repo");
+                url = MessageFormat.format("{0}://{1}/{2}/commits/branch/{3}", protocol, server, repo, branchName);
+            } else {
+                matcher = pGit.matcher(remote);
+                matcher.find();
+                String server = matcher.group("server");
+                String repo = matcher.group("repo");
+                url = MessageFormat.format("https://{0}/{1}/commits/branch/{2}", server, repo, branchName);
+            }
         }
         return url;
     }
 
     @Override
     public boolean supports(String remote) {
-        return p.matcher(remote).matches();
+        return p.matcher(remote).matches() || pGit.matcher(remote).matches();
     }
 
     @Override

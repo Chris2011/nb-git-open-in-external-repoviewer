@@ -35,6 +35,18 @@ public class BitBucketStrategyTest {
         String expResult = "https://bitbucket.org/elbrecht/git-blog-examples/commits/branch/master";
         assertEquals(expResult, result);
     }
+
+    @Test
+    public void testGetUrlSsh() {
+
+        String remote = "git@bitbucket.org:elbrecht/git-blog-examples.git";
+//        String branchName = "feature/feature42D";
+        String branchName = "master";
+        String branchRevId = "1234";
+        String result = new BitBucketStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String expResult = "https://bitbucket.org/elbrecht/git-blog-examples/commits/branch/master";
+        assertEquals(expResult, result);
+    }
     
     @Test
     public void testGetUrl_Username() {
