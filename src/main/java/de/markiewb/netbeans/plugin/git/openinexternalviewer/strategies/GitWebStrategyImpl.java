@@ -16,6 +16,7 @@
 package de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies;
 
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.RepoStrategy;
+import static de.markiewb.netbeans.plugin.git.openinexternalviewer.RepoStrategy.Type.OPEN;
 import java.text.MessageFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,28 +29,12 @@ import org.openide.util.lookup.ServiceProvider;
  * @author markiewb
  */
 @ServiceProvider(service = RepoStrategy.class)
-public final class GitWebStrategyImpl implements RepoStrategy {
+public final class GitWebStrategyImpl extends AbstractRepoStrategy {
 
-    private final Pattern p = Pattern.compile("(http|https)://(.*?)\\.(.+?)/(.+?).git");
+    private final Pattern p = Pattern.compile("(?<protocol>http|https)://(.*?)\\.(?<server>.+?)/(?<repo>.+).git");
 
-    @Override
-    public String getUrl(String remote, String branchName, String branchRevId) {
-        String url = null;
-        if (this.supports(remote)) {
-            Matcher matcher = p.matcher(remote);
-            matcher.find();
-            String protocol = matcher.group(1);
-            String subdomain = matcher.group(2);
-            String server = matcher.group(3);
-            String repo = matcher.group(4);
-            url = MessageFormat.format("{0}://gitweb.{1}/{2}.git/shortlog/refs/heads/{3}", protocol, server, repo, branchName);
-        }
-        return url;
-    }
-
-    @Override
-    public boolean supports(String remote) {
-        return p.matcher(remote).matches();
+    public GitWebStrategyImpl() {
+        addPattern(new PatternConfig(OPEN, p, "<protocol>://gitweb.<server>/<repo>.git/shortlog/refs/heads/<branch>"));
     }
 
     @Override

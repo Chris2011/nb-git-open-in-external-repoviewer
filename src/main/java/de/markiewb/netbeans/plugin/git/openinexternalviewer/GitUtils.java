@@ -24,6 +24,7 @@ import org.netbeans.libs.git.GitClient;
 import org.netbeans.libs.git.GitException;
 import org.netbeans.libs.git.GitRemoteConfig;
 import org.netbeans.libs.git.GitRepository;
+import org.netbeans.libs.git.SearchCriteria;
 import org.netbeans.libs.git.progress.ProgressMonitor;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;

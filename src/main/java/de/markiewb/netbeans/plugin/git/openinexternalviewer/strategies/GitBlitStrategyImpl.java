@@ -16,8 +16,7 @@
 package de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies;
 
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.RepoStrategy;
-import java.text.MessageFormat;
-import java.util.regex.Matcher;
+import static de.markiewb.netbeans.plugin.git.openinexternalviewer.RepoStrategy.Type.OPEN;
 import java.util.regex.Pattern;
 import org.openide.util.lookup.ServiceProvider;
 
@@ -26,32 +25,16 @@ import org.openide.util.lookup.ServiceProvider;
  * @author markiewb
  */
 @ServiceProvider(service = RepoStrategy.class)
-public final class GitBlitStrategyImpl implements RepoStrategy {
+public final class GitBlitStrategyImpl extends AbstractRepoStrategy {
 
-    private final Pattern p = Pattern.compile("(?<protocol>http|https)://(?<username>.+?@)?(?<server>.+?)/(git|r)/(?<repo>.+)\\.git");
+    private final Pattern p0_source = Pattern.compile("(?<protocol>http|https)://(?<username>.+?@)?(?<server>.+?)/(git/r)/(?<repo>.+)\\.git");
+    private final Pattern p1_source = Pattern.compile("(?<protocol>http|https)://(?<username>.+?@)?(?<server>.+?)/(git|r)/(?<repo>.+)\\.git");
+    private final String p0_target = "<protocol>://<server>/git/log/<repo|escapeSlashWithBang>.git/refs!heads!<branch|escapeSlashWithBang>";
+    private final String p1_target = "<protocol>://<server>/log/<repo|escapeSlashWithBang>.git/refs!heads!<branch|escapeSlashWithBang>";
 
-    @Override
-    public String getUrl(String remote, String branchName, String branchRevId) {
-        String url = null;
-        if (this.supports(remote)) {
-            Matcher matcher = p.matcher(remote);
-            matcher.find();
-            String protocol = matcher.group("protocol");
-            String username = matcher.group("username");
-            String server = matcher.group("server");
-            String repo = matcher.group("repo");
-            url = MessageFormat.format("{0}://{1}/log/{2}.git/refs!heads!{3}", protocol, server, escape(repo), escape(branchName));
-        }
-        return url;
-    }
-
-    @Override
-    public boolean supports(String remote) {
-        return p.matcher(remote).matches();
-    }
-
-    private String escape(String repo) {
-        return repo.replaceAll("/", "!");
+    public GitBlitStrategyImpl() {
+        addPattern(new PatternConfig(OPEN, p0_source, p0_target));
+        addPattern(new PatternConfig(OPEN, p1_source, p1_target));
     }
 
     @Override

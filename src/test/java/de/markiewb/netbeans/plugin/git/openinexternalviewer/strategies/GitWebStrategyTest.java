@@ -15,6 +15,7 @@
  */
 package de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies;
 
+import de.markiewb.netbeans.plugin.git.openinexternalviewer.RepoStrategy;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -25,11 +26,11 @@ import org.junit.Test;
 public class GitWebStrategyTest {
 
     @Test
-    public void testGetUrlHttp() {
+    public void testGetOpenUrlHttp() {
         String remote = "http://devel.dolmen-project.org/dolmen.menu.git";
         String branchName = "master";
         String branchRevId = "1234";
-        String result = new GitWebStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String result = new GitWebStrategyImpl().getUrl(RepoStrategy.Type.OPEN, remote, branchName, branchRevId);
         String expResult = "http://gitweb.dolmen-project.org/dolmen.menu.git/shortlog/refs/heads/master";
         assertEquals(expResult, result);
     }

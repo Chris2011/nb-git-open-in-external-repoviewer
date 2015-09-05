@@ -15,6 +15,7 @@
  */
 package de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies;
 
+import de.markiewb.netbeans.plugin.git.openinexternalviewer.RepoStrategy;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -25,52 +26,62 @@ import org.junit.Test;
 public class GitBlitStrategyTest {
 
     @Test
-    public void testGetUrl_Category() {
+    public void testGetOpenUrl_Category() {
         String remote = "http://my.company.com/gitblit/git/category/my.complex.repo.git";
         String branchName = "feature/feature42D";
         String branchRevId = "1234";
-        String result = new GitBlitStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String result = new GitBlitStrategyImpl().getUrl(RepoStrategy.Type.OPEN, remote, branchName, branchRevId);
         String expResult = "http://my.company.com/gitblit/log/category!my.complex.repo.git/refs!heads!feature!feature42D";
         assertEquals(expResult, result);
     }
     
     @Test
-    public void testGetUrl_CategoryAndUsername() {
+    public void testGetOpenUrl_CategoryAndUsername() {
         String remote = "http://user@my.company.com/gitblit/git/category/my.complex.repo.git";
         String branchName = "feature/feature42D";
         String branchRevId = "1234";
-        String result = new GitBlitStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String result = new GitBlitStrategyImpl().getUrl(RepoStrategy.Type.OPEN, remote, branchName, branchRevId);
         String expResult = "http://my.company.com/gitblit/log/category!my.complex.repo.git/refs!heads!feature!feature42D";
         assertEquals(expResult, result);
     }
 
     @Test
-    public void testGetUrl_Username() {
+    public void testGetOpenUrl_Username() {
         String remote = "http://user@my.company.com/gitblit/git/category/my.complex.repo.git";
         String branchName = "feature/feature42D";
         String branchRevId = "1234";
-        String result = new GitBlitStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String result = new GitBlitStrategyImpl().getUrl(RepoStrategy.Type.OPEN, remote, branchName, branchRevId);
         String expResult = "http://my.company.com/gitblit/log/category!my.complex.repo.git/refs!heads!feature!feature42D";
         assertEquals(expResult, result);
     }
 
     @Test
-    public void testGetUrl2() {
+    public void testOpenGetUrl2() {
         String remote = "https://demo-gitblit.rhcloud.com/git/gitblit.git";
         String branchName = "gh-pages";
         String branchRevId = "42D";
-        String result = new GitBlitStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String result = new GitBlitStrategyImpl().getUrl(RepoStrategy.Type.OPEN, remote, branchName, branchRevId);
         String expResult = "https://demo-gitblit.rhcloud.com/log/gitblit.git/refs!heads!gh-pages";
         assertEquals(expResult, result);
     }
     
     @Test
-    public void testGetUrl3() {
+    public void testGetOpenUrl3() {
         String remote = "http://user@my.company.com/gitblit/r/category/my.complex.repo.git";
         String branchName = "feature/feature42D";
         String branchRevId = "1234";
-        String result = new GitBlitStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String result = new GitBlitStrategyImpl().getUrl(RepoStrategy.Type.OPEN, remote, branchName, branchRevId);
         String expResult = "http://my.company.com/gitblit/log/category!my.complex.repo.git/refs!heads!feature!feature42D";
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testGetOpenUrl4() {
+        String remote = "http://git.delwink.com/git/r/patts-qt.git";
+        String branchName = "master";
+        String branchRevId = "1234";
+        String result = new GitBlitStrategyImpl().getUrl(RepoStrategy.Type.OPEN, remote, branchName, branchRevId);
+        String expResult = "http://git.delwink.com/git/log/patts-qt.git/refs!heads!master";
         assertEquals(expResult, result);
     }
 }

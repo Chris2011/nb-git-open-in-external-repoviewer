@@ -15,6 +15,7 @@
  */
 package de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies;
 
+import de.markiewb.netbeans.plugin.git.openinexternalviewer.RepoStrategy;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -25,38 +26,50 @@ import org.junit.Test;
 public class BitBucketStrategyTest {
 
     @Test
-    public void testGetUrl() {
+    public void testGetOpenUrl() {
 
         String remote = "https://bitbucket.org/elbrecht/git-blog-examples.git";
 //        String branchName = "feature/feature42D";
         String branchName = "master";
         String branchRevId = "1234";
-        String result = new BitBucketStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String result = new BitBucketStrategyImpl().getUrl(RepoStrategy.Type.OPEN, remote, branchName, branchRevId);
         String expResult = "https://bitbucket.org/elbrecht/git-blog-examples/commits/branch/master";
         assertEquals(expResult, result);
     }
 
     @Test
-    public void testGetUrlSsh() {
+    public void testGetOpenUrlSsh() {
 
         String remote = "git@bitbucket.org:elbrecht/git-blog-examples.git";
 //        String branchName = "feature/feature42D";
         String branchName = "master";
         String branchRevId = "1234";
-        String result = new BitBucketStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String result = new BitBucketStrategyImpl().getUrl(RepoStrategy.Type.OPEN, remote, branchName, branchRevId);
         String expResult = "https://bitbucket.org/elbrecht/git-blog-examples/commits/branch/master";
         assertEquals(expResult, result);
     }
     
     @Test
-    public void testGetUrl_Username() {
+    public void testGetOpenUrl_Username() {
 
         String remote = "https://user@bitbucket.org/elbrecht/git-blog-examples.git";
 //        String branchName = "feature/feature42D";
         String branchName = "master";
         String branchRevId = "1234";
-        String result = new BitBucketStrategyImpl().getUrl(remote, branchName, branchRevId);
+        String result = new BitBucketStrategyImpl().getUrl(RepoStrategy.Type.OPEN, remote, branchName, branchRevId);
         String expResult = "https://bitbucket.org/elbrecht/git-blog-examples/commits/branch/master";
+        assertEquals(expResult, result);
+    }
+
+
+    @Test
+    public void testGetPRUrlSsh() {
+
+        String remote = "git@bitbucket.org:elbrecht/git-blog-examples.git";
+        String branchName = "branch1";
+        String branchRevId = "1234";
+        String result = new BitBucketStrategyImpl().getUrl(RepoStrategy.Type.PULL_REQUEST, remote, branchName, branchRevId);
+        String expResult = "https://bitbucket.org/elbrecht/git-blog-examples/pull-request/new?source=elbrecht/git-blog-examples::branch1";
         assertEquals(expResult, result);
     }
 
