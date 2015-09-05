@@ -33,9 +33,9 @@ public final class GoogleCodeStrategyImpl implements RepoStrategy {
     private final Pattern p = Pattern.compile("(?<protocol>http|https)://(?<username>.*?)@?(?<server>code\\.google\\.com)/p/(?<repo>.+?)/");
 
     @Override
-    public String getUrl(String remote, String branchName, String branchRevId) {
+    public String getUrl(RepoStrategy.Type type, String remote, String branchName, String branchRevId) {
         String url = null;
-        if (this.supports(remote)) {
+        if (this.supports(type, remote)) {
             Matcher matcher = p.matcher(remote);
             matcher.find();
             String protocol = matcher.group("protocol");
@@ -48,8 +48,11 @@ public final class GoogleCodeStrategyImpl implements RepoStrategy {
     }
 
     @Override
-    public boolean supports(String remote) {
-        return p.matcher(remote).matches();
+    public boolean supports(RepoStrategy.Type type, String remote) {
+        if (RepoStrategy.Type.OPEN.equals(type)) {
+            return p.matcher(remote).matches();
+        }
+        return false;
     }
     
     @Override

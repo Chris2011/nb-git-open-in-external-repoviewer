@@ -37,9 +37,9 @@ public final class GitHubStrategyImpl implements RepoStrategy {
     private final Pattern pGit = Pattern.compile("(?<username>git)@(?<server>github.com):(?<repo>.+)\\.git");
 
     @Override
-    public String getUrl(String remote, String branchName, String branchRevId) {
+    public String getUrl(RepoStrategy.Type type, String remote, String branchName, String branchRevId) {
         String url = null;
-        if (this.supports(remote)) {
+        if (this.supports(type, remote)) {
             Pattern p = this.getMatchingPattern(remote);
             Matcher matcher = p.matcher(remote);
             matcher.find();
@@ -59,8 +59,11 @@ public final class GitHubStrategyImpl implements RepoStrategy {
     }
 
     @Override
-    public boolean supports(String remote) {
-        return getMatchingPattern(remote)!=null;
+    public boolean supports(RepoStrategy.Type type, String remote) {
+        if (RepoStrategy.Type.OPEN.equals(type)) {
+            return getMatchingPattern(remote)!=null;
+        }
+        return false;
 //        return ( (remote.endsWith(".git") && pHttpP1.matcher(remote).matches()) ||(!remote.endsWith(".git") && pHttpP2.matcher(remote).matches()) ||pGit.matcher(remote).matches());
     }
 
