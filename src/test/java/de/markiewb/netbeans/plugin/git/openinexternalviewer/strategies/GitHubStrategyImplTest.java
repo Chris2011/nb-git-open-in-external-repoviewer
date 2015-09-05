@@ -72,4 +72,16 @@ public class GitHubStrategyImplTest {
         String expResult = "https://github.com/markiewb/nb-git-branch-in-statusbar/commits/master";
         assertEquals(expResult, result);
     }
+    
+    @Test
+    public void testGetOpenUrlGit2() {
+
+        String remote = "git://github.com/madflow/flow-netbeans-markdown.git";
+//        String branchName = "feature/feature42D";
+        String branchName = "master";
+        String branchRevId = "1234";
+        String result = new GitHubStrategyImpl().getUrl(RepoStrategy.Type.OPEN, remote, branchName, branchRevId);
+        String expResult = "https://github.com/madflow/flow-netbeans-markdown/commits/master";
+        assertEquals(expResult, result);
+    }
 }

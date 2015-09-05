@@ -74,4 +74,14 @@ public class GitBlitStrategyTest {
         String expResult = "http://my.company.com/gitblit/log/category!my.complex.repo.git/refs!heads!feature!feature42D";
         assertEquals(expResult, result);
     }
+
+    @Test
+    public void testGetOpenUrl4() {
+        String remote = "http://git.delwink.com/git/r/patts-qt.git";
+        String branchName = "master";
+        String branchRevId = "1234";
+        String result = new GitBlitStrategyImpl().getUrl(RepoStrategy.Type.OPEN, remote, branchName, branchRevId);
+        String expResult = "http://git.delwink.com/git/log/patts-qt.git/refs!heads!master";
+        assertEquals(expResult, result);
+    }
 }

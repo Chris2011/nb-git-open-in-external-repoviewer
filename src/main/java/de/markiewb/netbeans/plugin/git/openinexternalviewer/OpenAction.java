@@ -19,15 +19,17 @@ import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
+import org.openide.util.NbBundle;
 
 @ActionID(category = "Git", id = "de.markiewb.netbeans.plugin.git.openinexternalviewer.OpenAction")
 @ActionRegistration(lazy = false, displayName = "openinexternalviewer.OpenAction")
 @ActionReferences({
     @ActionReference(path = "Projects/Actions", position = 500)
 })
+@NbBundle.Messages("LBL_OpenAction=Open '<remotebranch>' at '<label>'")
 public final class OpenAction extends UrlAction {
 
     public OpenAction() {
-        super(RepoStrategy.Type.OPEN, "Open ''{0}'' at ''{1}''");
+        super(RepoStrategy.Type.OPEN, Bundle.LBL_OpenAction());
     }
 }

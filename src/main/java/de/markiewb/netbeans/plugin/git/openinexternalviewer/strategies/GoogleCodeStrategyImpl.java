@@ -16,8 +16,7 @@
 package de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies;
 
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.RepoStrategy;
-import java.text.MessageFormat;
-import java.util.regex.Matcher;
+import static de.markiewb.netbeans.plugin.git.openinexternalviewer.RepoStrategy.Type.OPEN;
 import java.util.regex.Pattern;
 import org.openide.util.lookup.ServiceProvider;
 
@@ -28,33 +27,14 @@ import org.openide.util.lookup.ServiceProvider;
  * @author markiewb
  */
 @ServiceProvider(service = RepoStrategy.class)
-public final class GoogleCodeStrategyImpl implements RepoStrategy {
+public final class GoogleCodeStrategyImpl extends AbstractRepoStrategy {
 
-    private final Pattern p = Pattern.compile("(?<protocol>http|https)://(?<username>.*?)@?(?<server>code\\.google\\.com)/p/(?<repo>.+?)/");
+    private final Pattern p = Pattern.compile("(?<protocol>http|https)://(?<username>.*?)@?code\\.google\\.com/p/(?<repo>.+?)/");
 
-    @Override
-    public String getUrl(RepoStrategy.Type type, String remote, String branchName, String branchRevId) {
-        String url = null;
-        if (this.supports(type, remote)) {
-            Matcher matcher = p.matcher(remote);
-            matcher.find();
-            String protocol = matcher.group("protocol");
-            String username = matcher.group("username");
-            String server = matcher.group("server");
-            String repo = matcher.group("repo");
-            url = MessageFormat.format("{0}://{1}/p/{2}/source/list?name={3}", protocol, server, repo, branchName);
-        }
-        return url;
+    public GoogleCodeStrategyImpl() {
+        addPattern(new PatternConfig(OPEN, p, "<protocol>://code.google.com/p/<repo>/source/list?name=<branch>"));
     }
 
-    @Override
-    public boolean supports(RepoStrategy.Type type, String remote) {
-        if (RepoStrategy.Type.OPEN.equals(type)) {
-            return p.matcher(remote).matches();
-        }
-        return false;
-    }
-    
     @Override
     public String getLabel() {
         return "Google Code";

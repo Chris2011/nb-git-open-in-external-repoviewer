@@ -121,7 +121,10 @@ public abstract class UrlAction extends AbstractAction implements ContextAwareAc
                     final String remote = GitUtils.getRemote(gitRepoDirectory, origin);
                     final RepoStrategy strategy = getStrategy(remote);
                     if (strategy != null) {
-                        putValue(NAME, MessageFormat.format(nameFormat, remoteBranchName, strategy.getLabel()));
+                        String label = nameFormat;
+                        label=label.replaceAll("<remotebranch>", remoteBranchName);
+                        label=label.replaceAll("<label>", strategy.getLabel());
+                        putValue(NAME, label);
 
                         url = strategy.getUrl(type, remote, remoteName, activeBranch.getId());
                         setEnabled(null != url);

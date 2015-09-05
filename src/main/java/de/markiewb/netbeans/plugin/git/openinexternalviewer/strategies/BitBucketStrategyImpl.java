@@ -16,6 +16,8 @@
 package de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies;
 
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.RepoStrategy;
+import static de.markiewb.netbeans.plugin.git.openinexternalviewer.RepoStrategy.Type.OPEN;
+import static de.markiewb.netbeans.plugin.git.openinexternalviewer.RepoStrategy.Type.PULL_REQUEST;
 import java.text.MessageFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,45 +33,18 @@ import org.openide.util.lookup.ServiceProvider;
  * @author markiewb
  */
 @ServiceProvider(service = RepoStrategy.class)
-public final class BitBucketStrategyImpl implements RepoStrategy {
+public final class BitBucketStrategyImpl extends AbstractRepoStrategy {
 
-    private final Pattern p = Pattern.compile("(?<protocol>https)://(?<username>.+?@)?(?<server>bitbucket.org)/(?<repo>.+)\\.git");
-    private final Pattern pGit = Pattern.compile("(?<username>git)@(?<server>bitbucket.org):(?<repo>.+)\\.git");
+    private final Pattern p = Pattern.compile("(?<protocol>https)://(?<username>.+?@)?bitbucket\\.org/(?<repo>.+)\\.git");
+    private final Pattern pGit = Pattern.compile("(?<username>git)@bitbucket\\.org:(?<repo>.+)\\.git");
 
-    @Override
-    public String getUrl(RepoStrategy.Type type, String remote, String branchName, String branchRevId) {
-        String url = null;
-        if (this.supports(type, remote)) {
-            Matcher matcher = p.matcher(remote);
-            if (matcher.find()) {
-                String protocol = matcher.group("protocol");
-                String server = matcher.group("server");
-                String repo = matcher.group("repo");
-                url = MessageFormat.format(formatForType(type), protocol, server, repo, branchName);
-            } else {
-                matcher = pGit.matcher(remote);
-                matcher.find();
-                String server = matcher.group("server");
-                String repo = matcher.group("repo");
-                url = MessageFormat.format(formatForType(type), "https", server, repo, branchName);
-            }
-        }
-        return url;
-    }
+    public BitBucketStrategyImpl() {
 
-    private String formatForType(RepoStrategy.Type type) {
-        if (RepoStrategy.Type.OPEN.equals(type)) {
-            return "{0}://{1}/{2}/commits/branch/{3}";
-        }
-        if (RepoStrategy.Type.PULL_REQUEST.equals(type)) {
-            return "{0}://{1}/{2}/pull-request/new?source={2}::{3}";
-        }
-        throw new IllegalStateException("unknown RepoStrategy.type:" + type);
-    }
+        addPattern(new PatternConfig(OPEN, p, "<protocol>://bitbucket.org/<repo>/commits/branch/<branch>"));
+        addPattern(new PatternConfig(OPEN, pGit, "https://bitbucket.org/<repo>/commits/branch/<branch>"));
 
-    @Override
-    public boolean supports(RepoStrategy.Type type, String remote) {
-        return p.matcher(remote).matches() || pGit.matcher(remote).matches();
+        addPattern(new PatternConfig(PULL_REQUEST, p, "<protocol>://bitbucket.org/<repo>/pull-request/new?source=<repo>::<branch>"));
+        addPattern(new PatternConfig(PULL_REQUEST, pGit, "https://bitbucket.org/<repo>/pull-request/new?source=<repo>::<branch>"));
     }
 
     @Override
