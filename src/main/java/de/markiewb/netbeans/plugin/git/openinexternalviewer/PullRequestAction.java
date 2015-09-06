@@ -16,7 +16,7 @@ import org.openide.util.NbBundle;
 public final class PullRequestAction extends UrlAction {
 
     public PullRequestAction() {
-        super(RepoStrategy.Type.PULL_REQUEST, "Create Pull Request at {1}");
+        super(RepoStrategy.Type.PULL_REQUEST, Bundle.LBL_PullRequestAction());
     }
 
 }
