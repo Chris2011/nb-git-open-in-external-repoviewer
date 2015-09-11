@@ -15,19 +15,22 @@
  */
 package de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies;
 
-import org.openide.util.lookup.ServiceProvider;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * https://devel.dolmen-project.org/dolmen.menu.git
- * http://gitweb.dolmen-project.org/dolmen.menu.git/shortlog/refs/heads/master
  *
  * @author markiewb
  */
-@ServiceProvider(service = RepoStrategy.class)
-public final class GitWebStrategyImpl extends AbstractRepoStrategy {
+class PatternConfigs {
+    private final List<PatternConfig> patterns = new ArrayList<PatternConfig>();
 
-    public GitWebStrategyImpl() {
-        super("gitweb");
+    public void addPattern(PatternConfig pattern) {
+        patterns.add(pattern);
     }
 
+    public List<PatternConfig> getPatterns() {
+        return patterns;
+    }
+    
 }

@@ -13,21 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies;
+package de.markiewb.netbeans.plugin.git.openinexternalviewer.placeholders;
 
-import org.openide.util.lookup.ServiceProvider;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 /**
- * https://devel.dolmen-project.org/dolmen.menu.git
- * http://gitweb.dolmen-project.org/dolmen.menu.git/shortlog/refs/heads/master
  *
  * @author markiewb
  */
-@ServiceProvider(service = RepoStrategy.class)
-public final class GitWebStrategyImpl extends AbstractRepoStrategy {
+public class PlaceHolderResolvers {
+    private List<PlaceHolderResolver> resolvers = new ArrayList<PlaceHolderResolver>();
+    
 
-    public GitWebStrategyImpl() {
-        super("gitweb");
+
+    public PlaceHolderResolvers(PlaceHolderResolver... resolvers) {
+        this.resolvers = Arrays.asList(resolvers);
     }
 
+    public Collection<PlaceHolderResolver> getResolvers() {
+        return resolvers;
+    }
+
+    
+    
 }
