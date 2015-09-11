@@ -15,17 +15,27 @@
  */
 package de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies;
 
-import org.openide.util.lookup.ServiceProvider;
+import de.markiewb.netbeans.plugin.git.openinexternalviewer.placeholders.PlaceHolderResolvers;
 
-/**
- *
- * @author markiewb
- */
-@ServiceProvider(service = RepoStrategy.class)
-public final class GitBlitStrategyImpl extends AbstractRepoStrategy {
+public interface RepoStrategy {
 
-    public GitBlitStrategyImpl() {
-        super("gitblit");
+    public enum Type {
+
+        SHOW_LOG("Show log"), PULL_REQUEST("Create Pull-Request"), SHOW_COMMIT("Show commit"), SHOW_COMMITDIFF("Show diff"), SHOW_FILE_HISTORY("Show file history"), SHOW_FILE("Show file"), SHOW_FILE_COMMITDIFF("Show file in diff");
+
+        private final String label;
+
+        private Type(String label) {
+            this.label = label;
+
+        }
+
+        public String getLabel() {
+            return label;
+        }
     }
 
+    String getUrl(RepoStrategy.Type type, String remoteURI, PlaceHolderResolvers resolvers);
+
+    String getLabel();
 }

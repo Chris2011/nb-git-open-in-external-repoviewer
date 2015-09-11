@@ -13,21 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies;
-
-import org.openide.util.lookup.ServiceProvider;
+package de.markiewb.netbeans.plugin.git.openinexternalviewer.git;
 
 /**
- * https://devel.dolmen-project.org/dolmen.menu.git
- * http://gitweb.dolmen-project.org/dolmen.menu.git/shortlog/refs/heads/master
  *
  * @author markiewb
  */
-@ServiceProvider(service = RepoStrategy.class)
-public final class GitWebStrategyImpl extends AbstractRepoStrategy {
+public class WorkingCopyContext {
 
-    public GitWebStrategyImpl() {
-        super("gitweb");
+    String WCBranch;
+    String URIFull;
+    String WCRevision;
+
+    public WorkingCopyContext(String WCBranch, String WCRevision, String URIFull) {
+        this.WCBranch = WCBranch;
+        this.WCRevision = WCRevision;
+        this.URIFull = URIFull;
     }
 
+    public String getWCBranch() {
+        return WCBranch;
+    }
+
+    public String getURIFull() {
+        return URIFull;
+    }
+
+    public String getWCRevision() {
+        return WCRevision;
+    }
+    
 }
