@@ -79,6 +79,23 @@ public class Options {
                 + "gitweb.label=GitWeb\n"
                 + "gitweb.source.url.0=(?<protocol>http|https)://(.*?)\\.(?<server>.+?)/(?<repo>.+).git\n"
                 + "gitweb.target.show_log.url.0=<protocol>://gitweb.<server>/<repo>.git/shortlog/refs/heads/<branch>\n"
+                + "gitlab.label=Gitlab\n"
+                + "gitlab.source.url.0=https://gitlab.com/(?<repo>.+)\\.git\n"
+                + "gitlab.source.url.1=git@gitlab.com:(?<repo>.+)\\.git\n"
+                + "gitlab.target.show_log.url.0=https://gitlab.com/<repo>/commits/<branch>\n"
+                + "gitlab.target.show_log.url.1=https://gitlab.com/<repo>/commits/<branch>\n"
+                + "gitlab.target.show_commit.url.0=\n"
+                + "gitlab.target.show_commit.url.1=\n"
+                + "gitlab.target.pull_request.url.0=\n"
+                + "gitlab.target.pull_request.url.1=\n"
+                + "gitlab.target.show_commitdiff.url.0=https://gitlab.com/<repo>/commit/<revision>\n"
+                + "gitlab.target.show_commitdiff.url.1=https://gitlab.com/<repo>/commit/<revision>\n"
+                + "gitlab.target.show_file_history.url.0=https://gitlab.com/<repo>/commits/<revision>/<fullfilepath>\n"
+                + "gitlab.target.show_file_history.url.1=https://gitlab.com/<repo>/commits/<revision>/<fullfilepath>\n"
+                + "gitlab.target.show_file.url.0=https://gitlab.com/<repo>/blob/<revision>/<fullfilepath>#L<linenumber|1based>\n"
+                + "gitlab.target.show_file.url.1=https://gitlab.com/<repo>/blob/<revision>/<fullfilepath>#L<linenumber|1based>\n"
+                + "gitlab.target.show_file_commitdiff.url.0=\n"
+                + "gitlab.target.show_file_commitdiff.url.1=\n"
                 ;
         Preferences pref = NbPreferences.forModule(Options.class);
         try {

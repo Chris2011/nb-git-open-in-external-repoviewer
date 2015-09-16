@@ -32,6 +32,11 @@ public class BitBucketStrategyTest {
         return resolvers;
     }
 
+    @org.junit.Before
+    public void setup() {
+        new de.markiewb.netbeans.plugin.git.openinexternalviewer.Options().resetToDefault();
+    }
+
     @Test
     public void testGetOpenUrl() {
 
