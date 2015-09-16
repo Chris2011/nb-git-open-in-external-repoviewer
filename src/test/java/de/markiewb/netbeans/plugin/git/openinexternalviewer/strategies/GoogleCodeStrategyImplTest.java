@@ -26,6 +26,11 @@ import org.junit.Test;
  */
 public class GoogleCodeStrategyImplTest {
 
+    @org.junit.Before
+    public void setup() {
+        new de.markiewb.netbeans.plugin.git.openinexternalviewer.Options().resetToDefault();
+    }
+
     private PlaceHolderResolvers x(String branchName, String branchRevId) {
         WCPlaceHolderResolver wcPlaceHolderResolver = new WCPlaceHolderResolver(branchName, branchRevId);
         PlaceHolderResolvers resolvers = new PlaceHolderResolvers(wcPlaceHolderResolver);

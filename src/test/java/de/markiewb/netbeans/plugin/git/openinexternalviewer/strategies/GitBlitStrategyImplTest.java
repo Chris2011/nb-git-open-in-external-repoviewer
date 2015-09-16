@@ -28,6 +28,11 @@ import org.junit.Test;
  */
 public class GitBlitStrategyImplTest {
 
+    @org.junit.Before
+    public void setup() {
+        new de.markiewb.netbeans.plugin.git.openinexternalviewer.Options().resetToDefault();
+    }
+
     @Test
     public void testGetOpenUrl3() {
         String remote = "http://user@my.company.com/gitblit/r/category/my.complex.repo.git";
@@ -127,6 +132,7 @@ public class GitBlitStrategyImplTest {
         String expResult = "http://git.delwink.com/git/commitdiff/patts-qt.git/607a417df243451330d91b48515b4df9eb106580";
         assertEquals(expResult, result);
     }
+
     @Test
     public void testShowFile() {
         String remote = "http://my.company.com/gitblit/git/category/my.complex.repo.git";
@@ -134,7 +140,7 @@ public class GitBlitStrategyImplTest {
         String branchRevId = "1234";
         String fullFilePath = "src/com/foo/FooTest.java";
         Integer linenumber0Based = 32;
-        
+
         String result = new GitBlitStrategyImpl().getUrl(RepoStrategy.Type.SHOW_FILE, remote, x(branchName, branchRevId, fullFilePath, linenumber0Based));
         String expResult = "http://my.company.com/gitblit/blob/category!my.complex.repo.git/1234/src!com!foo!FooTest.java#L33";
         assertEquals(expResult, result);
@@ -147,7 +153,7 @@ public class GitBlitStrategyImplTest {
         String branchRevId = "607a417df243451330d91b48515b4df9eb106580";
         String fullFilePath = "src/com/delwink/ljp/Alignment.java";
         Integer linenumber0Based = 32;
-        
+
         String result = new GitBlitStrategyImpl().getUrl(RepoStrategy.Type.SHOW_FILE, remote, x(branchName, branchRevId, fullFilePath, linenumber0Based));
         String expResult = "http://git.delwink.com/git/blob/ljpapi.git/607a417df243451330d91b48515b4df9eb106580/src!com!delwink!ljp!Alignment.java#L33";
         assertEquals(expResult, result);
@@ -160,8 +166,8 @@ public class GitBlitStrategyImplTest {
         String branchRevId = "1234";
         String fullFilePath = "src/com/foo/FooTest.java";
         Integer linenumber0Based = 32;
-        
-        String result = new GitBlitStrategyImpl().getUrl(RepoStrategy.Type.SHOW_FILE_COMMITDIFF, remote, x(branchName, branchRevId, fullFilePath,linenumber0Based));
+
+        String result = new GitBlitStrategyImpl().getUrl(RepoStrategy.Type.SHOW_FILE_COMMITDIFF, remote, x(branchName, branchRevId, fullFilePath, linenumber0Based));
         String expResult = "http://my.company.com/gitblit/commitdiff/category!my.complex.repo.git/1234#src/com/foo/FooTest.java";
         assertEquals(expResult, result);
     }
@@ -173,7 +179,7 @@ public class GitBlitStrategyImplTest {
         String branchRevId = "607a417df243451330d91b48515b4df9eb106580";
         String fullFilePath = "pattsgui/aboutdialog.py";
         Integer linenumber0Based = 32;
-        String result = new GitBlitStrategyImpl().getUrl(RepoStrategy.Type.SHOW_FILE_COMMITDIFF, remote, x(branchName, branchRevId,fullFilePath,linenumber0Based));
+        String result = new GitBlitStrategyImpl().getUrl(RepoStrategy.Type.SHOW_FILE_COMMITDIFF, remote, x(branchName, branchRevId, fullFilePath, linenumber0Based));
         String expResult = "http://git.delwink.com/git/commitdiff/patts-qt.git/607a417df243451330d91b48515b4df9eb106580#pattsgui/aboutdialog.py";
         assertEquals(expResult, result);
     }
@@ -185,7 +191,7 @@ public class GitBlitStrategyImplTest {
         String branchRevId = "1234";
         String fullFilePath = "src/com/foo/FooTest.java";
         Integer linenumber0Based = 32;
-        
+
         String result = new GitBlitStrategyImpl().getUrl(RepoStrategy.Type.SHOW_FILE_HISTORY, remote, x(branchName, branchRevId, fullFilePath, linenumber0Based));
         String expResult = "http://my.company.com/gitblit/history/category!my.complex.repo.git/feature!feature42D/src!com!foo!FooTest.java";
         assertEquals(expResult, result);
