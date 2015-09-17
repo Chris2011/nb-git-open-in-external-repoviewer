@@ -160,31 +160,6 @@ public class GitBlitStrategyImplTest {
     }
 
     @Test
-    public void testShowFileCommitDiff() {
-        String remote = "http://my.company.com/gitblit/git/category/my.complex.repo.git";
-        String branchName = "feature/feature42D";
-        String branchRevId = "1234";
-        String fullFilePath = "src/com/foo/FooTest.java";
-        Integer linenumber0Based = 32;
-
-        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_FILE_COMMITDIFF, remote, x(branchName, branchRevId, fullFilePath, linenumber0Based));
-        String expResult = "http://my.company.com/gitblit/commitdiff/category!my.complex.repo.git/1234#src/com/foo/FooTest.java";
-        assertEquals(expResult, result);
-    }
-
-    @Test
-    public void testShowFileCommitDiff2() {
-        String remote = "http://git.delwink.com/git/r/patts-qt.git";
-        String branchName = "master";
-        String branchRevId = "607a417df243451330d91b48515b4df9eb106580";
-        String fullFilePath = "pattsgui/aboutdialog.py";
-        Integer linenumber0Based = 32;
-        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_FILE_COMMITDIFF, remote, x(branchName, branchRevId, fullFilePath, linenumber0Based));
-        String expResult = "http://git.delwink.com/git/commitdiff/patts-qt.git/607a417df243451330d91b48515b4df9eb106580#pattsgui/aboutdialog.py";
-        assertEquals(expResult, result);
-    }
-
-    @Test
     public void testShowFileHistory() {
         String remote = "http://my.company.com/gitblit/git/category/my.complex.repo.git";
         String branchName = "feature/feature42D";

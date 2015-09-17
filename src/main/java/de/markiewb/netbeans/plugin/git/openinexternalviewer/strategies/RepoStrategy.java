@@ -21,7 +21,7 @@ public interface RepoStrategy {
 
     public enum Type {
 
-        SHOW_LOG("Show log"), PULL_REQUEST("Create Pull-Request"), SHOW_COMMIT("Show commit"), SHOW_COMMITDIFF("Show diff"), SHOW_FILE_HISTORY("Show file history"), SHOW_FILE("Show file"), SHOW_FILE_COMMITDIFF("Show file in diff");
+        SHOW_LOG("Show log"), PULL_REQUEST("Create Pull-Request"), SHOW_COMMIT("Show commit"), SHOW_COMMITDIFF("Show diff"), SHOW_FILE_HISTORY("Show file history"), SHOW_FILE("Show file");
 
         private final String label;
 

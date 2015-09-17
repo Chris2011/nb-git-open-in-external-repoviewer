@@ -1,3 +1,4 @@
 Manifest-Version: 1.0
+OpenIDE-Module-Layer: de/markiewb/netbeans/plugin/git/openinexternalviewer/layer.xml
 OpenIDE-Module-Localizing-Bundle: de/markiewb/netbeans/plugin/git/openinexternalviewer/Bundle.properties
 OpenIDE-Module-Display-Category: Git
