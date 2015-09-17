@@ -21,6 +21,7 @@ import de.markiewb.netbeans.plugin.git.openinexternalviewer.placeholders.PlaceHo
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.placeholders.WCPlaceHolderResolver;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+import org.junit.Ignore;
 
 /**
  *
@@ -93,6 +94,7 @@ public class GitBlitStrategyImplTest {
         assertEquals(expResult, result);
     }
 
+    @Ignore
     @Test
     public void testShowCommit() {
         String remote = "http://my.company.com/gitblit/git/category/my.complex.repo.git";
@@ -103,6 +105,7 @@ public class GitBlitStrategyImplTest {
         assertEquals(expResult, result);
     }
 
+    @Ignore
     @Test
     public void testShowCommit2() {
         String remote = "http://git.delwink.com/git/r/patts-qt.git";
