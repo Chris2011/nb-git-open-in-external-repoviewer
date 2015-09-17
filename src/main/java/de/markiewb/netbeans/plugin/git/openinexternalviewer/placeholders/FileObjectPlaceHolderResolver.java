@@ -27,13 +27,13 @@ import org.openide.util.Exceptions;
  *
  * @author markiewb
  */
-public class EditorPlaceHolderResolver implements PlaceHolderResolver {
+public class FileObjectPlaceHolderResolver implements PlaceHolderResolver {
 
-    private final JTextComponent ed;
+    private final FileObject fo;
     private final FileObject gitRepoDirectory;
 
-    public EditorPlaceHolderResolver(JTextComponent ed, FileObject gitRepoDirectory) {
-        this.ed = ed;
+    public FileObjectPlaceHolderResolver(FileObject fo, FileObject gitRepoDirectory) {
+        this.fo = fo;
         this.gitRepoDirectory = gitRepoDirectory;
     }
 
@@ -45,7 +45,7 @@ public class EditorPlaceHolderResolver implements PlaceHolderResolver {
 
     @Override
     public Map<String, String> resolve() {
-        Config config = initFromEditor(ed, gitRepoDirectory);
+        Config config = initFromEditor(fo, gitRepoDirectory);
         Map<String, String> result = new HashMap<String, String>();
         if (null != config.linenumber) {
             result.put("<linenumber\\|0based>", config.linenumber.toString());
@@ -62,39 +62,13 @@ public class EditorPlaceHolderResolver implements PlaceHolderResolver {
     }
 
     //VisibleForTesting
-    protected Config initFromEditor(JTextComponent ed, FileObject gitRepoDirectory) {
+    protected Config initFromEditor(FileObject fileObject, FileObject gitRepoDirectory) {
         Config result = new Config();
-        if (null == ed) {
-            return result;
-        }
         if (null == gitRepoDirectory) {
             return result;
         }
-        BaseDocument doc = org.netbeans.editor.Utilities.getDocument(ed);
-        if (null == doc) {
-            return result;
-        }
-        FileObject fileObject = org.netbeans.modules.editor.NbEditorUtilities.getFileObject(doc);
         if (null != fileObject) {
             result.relativePath = org.openide.filesystems.FileUtil.getRelativePath(gitRepoDirectory, fileObject);
-        }
-        //org.netbeans.editor.Utilities
-        //org.netbeans.modules.editor.NbEditorUtilities
-        try {
-
-            int lineEnd = org.netbeans.editor.Utilities.getLineOffset(doc, ed.getSelectionEnd());
-            int lineStart = org.netbeans.editor.Utilities.getLineOffset(doc, ed.getSelectionStart());
-            if (lineEnd == lineStart) {
-                //single line 
-                result.linenumber = lineStart;
-
-            } else {
-                //multiple lines
-                result.linenumber = null;
-
-            }
-        } catch (BadLocationException ex) {
-            Exceptions.printStackTrace(ex);
         }
         return result;
     }

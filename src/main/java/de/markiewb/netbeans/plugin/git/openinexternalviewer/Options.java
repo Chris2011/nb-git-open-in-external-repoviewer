@@ -157,8 +157,6 @@ public class Options {
                 + "gitblit.target.show_file_history.url.1=<protocol>://<server>/history/<repo|escapeSlashWithBang>.git/<branch|escapeSlashWithBang>/<fullfilepath|escapeSlashWithBang>\n"
                 + "gitblit.target.show_file.url.0=<protocol>://<server>/git/blob/<repo|escapeSlashWithBang>.git/<revision>/<fullfilepath|escapeSlashWithBang>#L<linenumber|1based>\n"
                 + "gitblit.target.show_file.url.1=<protocol>://<server>/blob/<repo|escapeSlashWithBang>.git/<revision>/<fullfilepath|escapeSlashWithBang>#L<linenumber|1based>\n"
-                + "gitblit.target.show_file_commitdiff.url.0=<protocol>://<server>/git/commitdiff/<repo|escapeSlashWithBang>.git/<revision>#<fullfilepath>\n"
-                + "gitblit.target.show_file_commitdiff.url.1=<protocol>://<server>/commitdiff/<repo|escapeSlashWithBang>.git/<revision>#<fullfilepath>\n"
                 + "googlecode.label=Google Code\n"
                 + "googlecode.source.url.0=(?<protocol>http|https)://(?<username>.*?)@?code\\.google\\.com/p/(?<repo>.+?)/\n"
                 + "googlecode.target.show_log.url.0=<protocol>://code.google.com/p/<repo>/source/list?name=<branch>\n"
@@ -196,8 +194,7 @@ public class Options {
                 + "gitlab.target.show_file_history.url.1=https://gitlab.com/<repo>/commits/<revision>/<fullfilepath>\n"
                 + "gitlab.target.show_file.url.0=https://gitlab.com/<repo>/blob/<revision>/<fullfilepath>#L<linenumber|1based>\n"
                 + "gitlab.target.show_file.url.1=https://gitlab.com/<repo>/blob/<revision>/<fullfilepath>#L<linenumber|1based>\n"
-                + "gitlab.target.show_file_commitdiff.url.0=\n"
-                + "gitlab.target.show_file_commitdiff.url.1=\n";
+                ;
     }
 
 }

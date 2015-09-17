@@ -27,11 +27,11 @@ import org.openide.awt.ActionRegistration;
 @ActionID(category = "Git", id = "de.markiewb.netbeans.plugin.git.openinexternalviewer.SubMenuActionForEditor")
 @ActionRegistration(lazy = false, displayName = "openinexternalviewer.SubMenuActionForEditor")
 @ActionReferences({
-    @ActionReference(path = "Editors/Popup", position = 500)
+    @ActionReference(path = "Editors/TabActions", position = 299),
 })
 public final class SubMenuActionForEditor extends AbstractRepositoryPopupAction {
 
-    private final EnumSet<RepoStrategy.Type> SUPPORTEDTYPES = EnumSet.of(RepoStrategy.Type.SHOW_FILE_HISTORY, RepoStrategy.Type.SHOW_FILE, RepoStrategy.Type.SHOW_FILE_COMMITDIFF);
+    private final EnumSet<RepoStrategy.Type> SUPPORTEDTYPES = EnumSet.of(RepoStrategy.Type.SHOW_FILE_HISTORY, RepoStrategy.Type.SHOW_FILE);
 
     @Override
     public EnumSet<Type> getSUPPORTEDTYPES() {

@@ -133,6 +133,7 @@ final class ConfigPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnResetActionPerformed
 
     void load() {
+        new Options().resetToDefaultIfNotExisting();
         Preferences pref = NbPreferences.forModule(Options.class);
 
         String text = new Options().load(pref);

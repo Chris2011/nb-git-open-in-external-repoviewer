@@ -18,6 +18,8 @@ package de.markiewb.netbeans.plugin.git.openinexternalviewer.actions;
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.Options;
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.git.GitUtils;
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.placeholders.EditorPlaceHolderResolver;
+import de.markiewb.netbeans.plugin.git.openinexternalviewer.placeholders.FileObjectPlaceHolderResolver;
+import de.markiewb.netbeans.plugin.git.openinexternalviewer.placeholders.PlaceHolderResolver;
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.placeholders.PlaceHolderResolvers;
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.placeholders.WCPlaceHolderResolver;
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies.AbstractRepoStrategy;
@@ -35,6 +37,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.text.JTextComponent;
 import org.netbeans.api.editor.EditorRegistry;
+import org.netbeans.editor.BaseDocument;
 import org.netbeans.libs.git.GitBranch;
 import org.openide.filesystems.FileObject;
 import org.openide.util.Lookup;
@@ -95,7 +98,9 @@ public abstract class AbstractRepositoryPopupAction extends AbstractAction imple
         if (lookupAll.size() >= 2) {
             return result;
         }
-        FileObject gitRepoDirectory = GitUtils.getGitRepoDirectory(lookupAll.iterator().next());
+        final FileObject fileObject = lookupAll.iterator().next();
+
+        FileObject gitRepoDirectory = GitUtils.getGitRepoDirectory(fileObject);
         if (gitRepoDirectory == null) {
             return result;
         }
@@ -121,14 +126,39 @@ public abstract class AbstractRepositoryPopupAction extends AbstractAction imple
             {
                 final String origin = remoteBranchName.substring(0, indexOf);
                 final String remoteName = remoteBranchName.substring(indexOf + 1);
-                JTextComponent ed = EditorRegistry.lastFocusedComponent();
-                EditorPlaceHolderResolver editorPlaceHolderResolver = new EditorPlaceHolderResolver(ed, gitRepoDirectory);
+                PlaceHolderResolver fileOrEditorResolver = getFileOrEditorPlaceholder(fileObject, gitRepoDirectory);
+
                 WCPlaceHolderResolver wcPlaceHolderResolver = new WCPlaceHolderResolver(remoteName, activeBranch.getId());
-                PlaceHolderResolvers resolvers = new PlaceHolderResolvers(wcPlaceHolderResolver, editorPlaceHolderResolver);
+                PlaceHolderResolvers resolvers = new PlaceHolderResolvers(wcPlaceHolderResolver, fileOrEditorResolver);
                 final String remoteURI = GitUtils.getRemote(gitRepoDirectory, origin);
                 return getStrategy(remoteURI, resolvers);
             }
         }
+    }
+
+    public PlaceHolderResolver getFileOrEditorPlaceholder(final FileObject fileObject, FileObject gitRepoDirectory) {
+        BaseDocument doc = null;
+        JTextComponent ed = EditorRegistry.lastFocusedComponent();
+        if (ed != null) {
+            doc = org.netbeans.editor.Utilities.getDocument(ed);
+        }
+        PlaceHolderResolver fileOrEditorResolver;
+        if (null != doc) {
+
+            FileObject fileObjectFromDoc = org.netbeans.modules.editor.NbEditorUtilities.getFileObject(doc);
+            //Is the current editor for the current fileobject?
+            //use the editor
+            if (fileObject.equals(fileObjectFromDoc)) {
+                fileOrEditorResolver = new EditorPlaceHolderResolver(ed, gitRepoDirectory);
+
+            } else {
+                fileOrEditorResolver = new FileObjectPlaceHolderResolver(fileObject, gitRepoDirectory);
+            }
+        } else {
+            fileOrEditorResolver = new FileObjectPlaceHolderResolver(fileObject, gitRepoDirectory);
+
+        }
+        return fileOrEditorResolver;
     }
 
     protected abstract EnumSet<RepoStrategy.Type> getSUPPORTEDTYPES();
