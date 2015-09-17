@@ -4,7 +4,7 @@
 
     <groupId>de.markiewb.netbeans.plugins</groupId>
     <artifactId>open.url.of.git.repository.hoster</artifactId>
-    <version>1.3.8.1-SNAPSHOT</version>
+    <version>1.4.0.1-SNAPSHOT</version>
     <packaging>nbm</packaging>
 
     <name>Open URL of GIT repository hoster</name>
@@ -168,22 +168,38 @@
             </plugin>
         </plugins>
     </build>
-    <description>This plugins adds new git-related actions to the context menu of a GIT-versioned project.
+    <description>This plugins adds git-related actions to the context menu of a GIT-versioned project OR of the tab context menu.
+Internally it parses the GIT URL of the project, generates specific URLs for the GIT repository hoster and opens the URL in the external browser.
+&lt;p&gt;
+Following actions are added to the project context menu:
 &lt;ul&gt;
-&lt;li&gt;"&lt;i&gt;Open 'origin/branchname' at 'XXX&lt;/i&gt;'&lt;p&gt;It parses the GIT URL of the project, generates an URL for the commit history page (at the matching GIT repository hoster) based on predefined patterns and opens the URL in the external browser.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;"&lt;i&gt;Create Pullrequest at 'XXX&lt;/i&gt;'&lt;p&gt;(where implemented)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;"&lt;i&gt;Show log&lt;/i&gt;"&lt;p&gt;Open the commit overview/history view for the current branch&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;"&lt;i&gt;Show commit&lt;/i&gt;"&lt;p&gt;Open the commit for the current revision (where implemented)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;"&lt;i&gt;Show diff&lt;/i&gt;"&lt;p&gt;Open the commit diff for the current revision (where implemented)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;"&lt;i&gt;Create pull request&lt;/i&gt;'&lt;p&gt;Open a website to create a pull request (where implemented)&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/p&gt;
+&lt;p&gt;
+Following actions are added to the context menu of the editor tab:
+&lt;ul&gt;
+&lt;li&gt;"&lt;i&gt;Show file&lt;/i&gt;"&lt;p&gt;Open the current file for the current revision (where implemented)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;"&lt;i&gt;Show file history&lt;/i&gt;"&lt;p&gt;Open the history view of the current file (where implemented)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/p&gt;
 
-&lt;img src="https://raw.github.com/markiewb/nb-git-open-in-external-repoviewer/master/doc/screenshot1.png"/&gt;
+&lt;img src="https://raw.github.com/markiewb/nb-git-open-in-external-repoviewer/master/doc/1.4.0.png"/&gt;
 
-&lt;p&gt;Currently supported patterns: GitBlit, BitBucket, GitHub, GoogleCode, GitWeb&lt;/p&gt;
+&lt;p&gt;Currently supported patterns: GitBlit, gitlab.com, bitbucket.org, github.com, code.google.com, GitWeb&lt;/p&gt;
 
 
-&lt;h2&gt;Updates in 1.3.8:&lt;/h2&gt;
+&lt;h2&gt;Updates in 1.4.0:&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/pull/22"&gt;Issue 22&lt;/a&gt;]: Add "Create Pull Request" action (currently for bitbucket only) (PR by @mkleint)&lt;/li&gt;
+&lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/20"&gt;Issue 20&lt;/a&gt;]: Support patterns for Gitlab.com&lt;/li&gt;
 &lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/24"&gt;Issue 24&lt;/a&gt;]: Additional patterns for github/gitblit&lt;/li&gt;
-&lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/23"&gt;Issue 23&lt;/a&gt;]: Refactoring of patterns&lt;/li&gt;
+&lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/26"&gt;Issue 26&lt;/a&gt;]: More patterns for gitblit&lt;/li&gt;
+&lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/23"&gt;Refactoring 23&lt;/a&gt;]: Refactoring of patterns - introduced a submenu and registered to editor tab too&lt;/li&gt;
+&lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/27"&gt;Refactoring 27&lt;/a&gt;]: Configurable options - custom patterns for hosters can be defined in options&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2&gt;Updates in 1.3.7:&lt;/h2&gt;
