@@ -28,15 +28,17 @@ import org.openide.util.Exceptions;
  * @author markiewb
  */
 public class EditorPlaceHolderResolver implements PlaceHolderResolver {
+
     private final JTextComponent ed;
     private final FileObject gitRepoDirectory;
-
 
     public EditorPlaceHolderResolver(JTextComponent ed, FileObject gitRepoDirectory) {
         this.ed = ed;
         this.gitRepoDirectory = gitRepoDirectory;
     }
-    protected static class Config{
+
+    protected static class Config {
+
         Integer linenumber;
         String relativePath;
     }
@@ -47,7 +49,7 @@ public class EditorPlaceHolderResolver implements PlaceHolderResolver {
         Map<String, String> result = new HashMap<String, String>();
         if (null != config.linenumber) {
             result.put("<linenumber\\|0based>", config.linenumber.toString());
-            result.put("<linenumber\\|1based>", String.valueOf(config.linenumber+1));
+            result.put("<linenumber\\|1based>", String.valueOf(config.linenumber + 1));
         }
         if (null != config.relativePath) {
             result.put("<fullfilepath>", config.relativePath);
@@ -58,7 +60,7 @@ public class EditorPlaceHolderResolver implements PlaceHolderResolver {
 
     //VisibleForTesting
     protected Config initFromEditor(JTextComponent ed, FileObject gitRepoDirectory) {
-        Config result=new Config();
+        Config result = new Config();
         if (null == ed) {
             return result;
         }
@@ -71,7 +73,7 @@ public class EditorPlaceHolderResolver implements PlaceHolderResolver {
         }
         FileObject fileObject = org.netbeans.modules.editor.NbEditorUtilities.getFileObject(doc);
         if (null != fileObject) {
-            result.relativePath=org.openide.filesystems.FileUtil.getRelativePath(gitRepoDirectory, fileObject);
+            result.relativePath = org.openide.filesystems.FileUtil.getRelativePath(gitRepoDirectory, fileObject);
         }
         //org.netbeans.editor.Utilities
         //org.netbeans.modules.editor.NbEditorUtilities
@@ -93,7 +95,6 @@ public class EditorPlaceHolderResolver implements PlaceHolderResolver {
         }
         return result;
     }
-
 
     private String escapeSlashWithBang(String repo) {
         return repo.replaceAll("/", "!");

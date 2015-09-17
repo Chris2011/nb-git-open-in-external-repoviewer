@@ -27,6 +27,7 @@ import org.openide.util.Exceptions;
  * @author markiewb
  */
 public class OpenURLAction extends AbstractAction {
+
     private final AbstractRepositoryPopupAction outer;
     private final String url;
     public String label;
@@ -46,5 +47,5 @@ public class OpenURLAction extends AbstractAction {
             Exceptions.printStackTrace(ex);
         }
     }
-    
+
 }

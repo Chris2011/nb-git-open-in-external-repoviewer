@@ -45,7 +45,7 @@ public class BitBucketStrategyTest {
         String branchName = "master";
         String branchRevId = "1234";
 
-        String result = new BitBucketStrategyImpl().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
         String expResult = "https://bitbucket.org/elbrecht/git-blog-examples/commits/branch/master";
         assertEquals(expResult, result);
     }
@@ -57,7 +57,7 @@ public class BitBucketStrategyTest {
 //        String branchName = "feature/feature42D";
         String branchName = "master";
         String branchRevId = "1234";
-        String result = new BitBucketStrategyImpl().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
         String expResult = "https://bitbucket.org/elbrecht/git-blog-examples/commits/branch/master";
         assertEquals(expResult, result);
     }
@@ -69,7 +69,7 @@ public class BitBucketStrategyTest {
 //        String branchName = "feature/feature42D";
         String branchName = "master";
         String branchRevId = "1234";
-        String result = new BitBucketStrategyImpl().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
         String expResult = "https://bitbucket.org/elbrecht/git-blog-examples/commits/branch/master";
         assertEquals(expResult, result);
     }
@@ -80,9 +80,16 @@ public class BitBucketStrategyTest {
         String remote = "git@bitbucket.org:elbrecht/git-blog-examples.git";
         String branchName = "branch1";
         String branchRevId = "1234";
-        String result = new BitBucketStrategyImpl().getUrl(RepoStrategy.Type.PULL_REQUEST, remote, x(branchName, branchRevId));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.PULL_REQUEST, remote, x(branchName, branchRevId));
         String expResult = "https://bitbucket.org/elbrecht/git-blog-examples/pull-request/new?source=elbrecht/git-blog-examples::branch1";
         assertEquals(expResult, result);
+    }
+
+    private static class StrategyUnderTest extends AbstractRepoStrategy {
+
+        public StrategyUnderTest() {
+            super("bitbucket");
+        }
     }
 
 }

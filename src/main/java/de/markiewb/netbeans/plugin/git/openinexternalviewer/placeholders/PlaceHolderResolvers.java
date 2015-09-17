@@ -25,9 +25,8 @@ import java.util.List;
  * @author markiewb
  */
 public class PlaceHolderResolvers {
-    private List<PlaceHolderResolver> resolvers = new ArrayList<PlaceHolderResolver>();
-    
 
+    private List<PlaceHolderResolver> resolvers = new ArrayList<PlaceHolderResolver>();
 
     public PlaceHolderResolvers(PlaceHolderResolver... resolvers) {
         this.resolvers = Arrays.asList(resolvers);
@@ -37,6 +36,4 @@ public class PlaceHolderResolvers {
         return resolvers;
     }
 
-    
-    
 }

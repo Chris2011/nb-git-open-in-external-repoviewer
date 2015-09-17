@@ -15,10 +15,12 @@
  */
 package de.markiewb.netbeans.plugin.git.openinexternalviewer.actions;
 
+import de.markiewb.netbeans.plugin.git.openinexternalviewer.Options;
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.git.GitUtils;
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.placeholders.EditorPlaceHolderResolver;
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.placeholders.PlaceHolderResolvers;
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.placeholders.WCPlaceHolderResolver;
+import de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies.AbstractRepoStrategy;
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies.RepoStrategy;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -132,7 +134,13 @@ public abstract class AbstractRepositoryPopupAction extends AbstractAction imple
     protected abstract EnumSet<RepoStrategy.Type> getSUPPORTEDTYPES();
 
     protected RepoStrategyConfig getStrategy(String remoteURI, PlaceHolderResolvers resolvers) {
-        Collection<? extends RepoStrategy> strategies = Lookup.getDefault().lookupAll(RepoStrategy.class);
+
+        List<String> strategyIds = new Options().getStrategies();
+        List<RepoStrategy> strategies = new ArrayList<RepoStrategy>();
+        for (String strategyId : strategyIds) {
+            strategies.add(new AbstractRepoStrategy(strategyId));
+        }
+
         for (RepoStrategy strategy : strategies) {
             boolean supported;
             try {

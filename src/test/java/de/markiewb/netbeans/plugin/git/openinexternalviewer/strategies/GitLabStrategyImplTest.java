@@ -38,7 +38,7 @@ public class GitLabStrategyImplTest {
         String remote = "https://gitlab.com/elimane-gueye/maven-git-commit-id-plugin.git";
         String branchName = "master";
         String branchRevId = "1234";
-        String result = new GitLabStrategyImpl().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
         String expResult = "https://gitlab.com/elimane-gueye/maven-git-commit-id-plugin/commits/master";
         assertEquals(expResult, result);
     }
@@ -48,7 +48,7 @@ public class GitLabStrategyImplTest {
         String remote = "git@gitlab.com:elimane-gueye/maven-git-commit-id-plugin.git";
         String branchName = "master";
         String branchRevId = "1234";
-        String result = new GitLabStrategyImpl().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
         String expResult = "https://gitlab.com/elimane-gueye/maven-git-commit-id-plugin/commits/master";
         assertEquals(expResult, result);
     }
@@ -58,7 +58,7 @@ public class GitLabStrategyImplTest {
         String remote = "https://gitlab.com/elimane-gueye/maven-git-commit-id-plugin.git";
         String branchName = "master";
         String branchRevId = "70a17c8ec9e066cebb94714d13c39f28f36c4785";
-        String result = new GitLabStrategyImpl().getUrl(RepoStrategy.Type.SHOW_COMMITDIFF, remote, x(branchName, branchRevId));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_COMMITDIFF, remote, x(branchName, branchRevId));
         String expResult = "https://gitlab.com/elimane-gueye/maven-git-commit-id-plugin/commit/70a17c8ec9e066cebb94714d13c39f28f36c4785";
         assertEquals(expResult, result);
     }
@@ -68,7 +68,7 @@ public class GitLabStrategyImplTest {
         String remote = "git@gitlab.com:elimane-gueye/maven-git-commit-id-plugin.git";
         String branchName = "master";
         String branchRevId = "70a17c8ec9e066cebb94714d13c39f28f36c4785";
-        String result = new GitLabStrategyImpl().getUrl(RepoStrategy.Type.SHOW_COMMITDIFF, remote, x(branchName, branchRevId));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_COMMITDIFF, remote, x(branchName, branchRevId));
         String expResult = "https://gitlab.com/elimane-gueye/maven-git-commit-id-plugin/commit/70a17c8ec9e066cebb94714d13c39f28f36c4785";
         assertEquals(expResult, result);
     }
@@ -78,7 +78,7 @@ public class GitLabStrategyImplTest {
         String remote = "https://gitlab.com/elimane-gueye/maven-git-commit-id-plugin.git";
         String branchName = "master";
         String branchRevId = "70a17c8ec9e066cebb94714d13c39f28f36c4785";
-        String result = new GitLabStrategyImpl().getUrl(RepoStrategy.Type.SHOW_FILE, remote, x(branchName, branchRevId, "src/main/java/pl/project13/maven/git/GitCommitIdMojo.java", 41));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_FILE, remote, x(branchName, branchRevId, "src/main/java/pl/project13/maven/git/GitCommitIdMojo.java", 41));
         String expResult = "https://gitlab.com/elimane-gueye/maven-git-commit-id-plugin/blob/70a17c8ec9e066cebb94714d13c39f28f36c4785/src/main/java/pl/project13/maven/git/GitCommitIdMojo.java#L42";
         assertEquals(expResult, result);
     }
@@ -88,7 +88,7 @@ public class GitLabStrategyImplTest {
         String remote = "https://gitlab.com/elimane-gueye/maven-git-commit-id-plugin.git";
         String branchName = "master";
         String branchRevId = "70a17c8ec9e066cebb94714d13c39f28f36c4785";
-        String result = new GitLabStrategyImpl().getUrl(RepoStrategy.Type.SHOW_FILE_HISTORY, remote, x(branchName, branchRevId, "src/main/java/pl/project13/maven/git/GitCommitIdMojo.java", -1));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_FILE_HISTORY, remote, x(branchName, branchRevId, "src/main/java/pl/project13/maven/git/GitCommitIdMojo.java", -1));
         String expResult = "https://gitlab.com/elimane-gueye/maven-git-commit-id-plugin/commits/70a17c8ec9e066cebb94714d13c39f28f36c4785/src/main/java/pl/project13/maven/git/GitCommitIdMojo.java";
         assertEquals(expResult, result);
     }
@@ -98,7 +98,7 @@ public class GitLabStrategyImplTest {
         String remote = "git@gitlab.com:elimane-gueye/maven-git-commit-id-plugin.git";
         String branchName = "master";
         String branchRevId = "70a17c8ec9e066cebb94714d13c39f28f36c4785";
-        String result = new GitLabStrategyImpl().getUrl(RepoStrategy.Type.SHOW_FILE_HISTORY, remote, x(branchName, branchRevId, "src/main/java/pl/project13/maven/git/GitCommitIdMojo.java", -1));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_FILE_HISTORY, remote, x(branchName, branchRevId, "src/main/java/pl/project13/maven/git/GitCommitIdMojo.java", -1));
         String expResult = "https://gitlab.com/elimane-gueye/maven-git-commit-id-plugin/commits/70a17c8ec9e066cebb94714d13c39f28f36c4785/src/main/java/pl/project13/maven/git/GitCommitIdMojo.java";
         assertEquals(expResult, result);
     }
@@ -108,7 +108,7 @@ public class GitLabStrategyImplTest {
         String remote = "git@gitlab.com:elimane-gueye/maven-git-commit-id-plugin.git";
         String branchName = "master";
         String branchRevId = "70a17c8ec9e066cebb94714d13c39f28f36c4785";
-        String result = new GitLabStrategyImpl().getUrl(RepoStrategy.Type.SHOW_FILE, remote, x(branchName, branchRevId, "src/main/java/pl/project13/maven/git/GitCommitIdMojo.java", 41));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_FILE, remote, x(branchName, branchRevId, "src/main/java/pl/project13/maven/git/GitCommitIdMojo.java", 41));
         String expResult = "https://gitlab.com/elimane-gueye/maven-git-commit-id-plugin/blob/70a17c8ec9e066cebb94714d13c39f28f36c4785/src/main/java/pl/project13/maven/git/GitCommitIdMojo.java#L42";
         assertEquals(expResult, result);
     }
@@ -124,6 +124,13 @@ public class GitLabStrategyImplTest {
         EditorPlaceHolderResolver mockedEditorPlaceHolderResolver = new MockedEditorPlaceHolderResolver(fullFilePath, linenumber0Based);
         PlaceHolderResolvers resolvers = new PlaceHolderResolvers(wcPlaceHolderResolver, mockedEditorPlaceHolderResolver);
         return resolvers;
+    }
+
+    private static class StrategyUnderTest extends AbstractRepoStrategy {
+
+        public StrategyUnderTest() {
+            super("gitlab");
+        }
     }
 
 }

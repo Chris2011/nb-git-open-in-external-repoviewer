@@ -42,5 +42,5 @@ public class WorkingCopyContext {
     public String getWCRevision() {
         return WCRevision;
     }
-    
+
 }

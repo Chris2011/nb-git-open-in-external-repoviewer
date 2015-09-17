@@ -24,27 +24,25 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.prefs.Preferences;
-import java.util.regex.Pattern;
-import org.openide.util.NbPreferences;
 
 /**
  *
  * @author markiewb
  */
-public abstract class AbstractRepoStrategy implements RepoStrategy {
+public class AbstractRepoStrategy implements RepoStrategy {
 
     private final String label;
 
     private final PatternConfigs patternConfigs = new PatternConfigs();
 
     public AbstractRepoStrategy(String strategy) {
-        new Options().resetToDefaultIfNotExisting();
+        final Options prefs = new Options();
 
-        Preferences pref = NbPreferences.forModule(Options.class);
-        label = getLabelFromPreferences(pref, strategy);
+        prefs.resetToDefaultIfNotExisting();
 
-        List<PatternConfig> configs = getPatternConfigs(pref, strategy);
+        label = prefs.getLabelFromPreferences(strategy);
+
+        List<PatternConfig> configs = prefs.getPatternConfigs(strategy);
         for (PatternConfig config : configs) {
             patternConfigs.addPattern(config);
         }
@@ -87,45 +85,6 @@ public abstract class AbstractRepoStrategy implements RepoStrategy {
 //        System.out.println("argMap = " + argMap);
 
         return replacePlaceholdersInTargetURL(pattern.getTargetURL(), argMap);
-    }
-
-    private String getLabelFromPreferences(Preferences pref, String strategy) {
-        return pref.get(strategy + ".label", "");
-    }
-
-    private List<PatternConfig> getPatternConfigs(Preferences pref, String strategy) {
-        List<String> sourceURLs = getSourceURLs(pref, strategy);
-        Type[] values = Type.values();
-        List<PatternConfig> configs = new ArrayList<PatternConfig>();
-        for (int i = 0; i < sourceURLs.size(); i++) {
-
-            for (Type type : values) {
-                //f.e.: gitblit.target.show_log.url.0
-                String key = strategy + ".target." + type.name().toLowerCase() + ".url." + i;
-                //f.e.: <protocol>://<server>/git/log/<repo|escapeSlashWithBang>.git/refs!heads!<branch|escapeSlashWithBang>
-                String value = pref.get(key, null);
-                if (null != value && !value.isEmpty()) {
-                    final PatternConfig config = new PatternConfig(type, Pattern.compile(sourceURLs.get(i)), value);
-                    configs.add(config);
-                }
-            }
-        }
-        return configs;
-    }
-
-    private List<String> getSourceURLs(Preferences pref, String strategy) {
-        List<String> sourceURLs = new ArrayList<String>();
-        int i = 0;
-        while (true) {
-            //like gitblit.source.url.0
-            String sourceUrl = pref.get(strategy + ".source.url." + i, null);
-            if (null == sourceUrl) {
-                break;
-            }
-            i++;
-            sourceURLs.add(sourceUrl);
-        }
-        return sourceURLs;
     }
 
     private String replacePlaceholdersInTargetURL(String target, Map<String, String> argMap) {

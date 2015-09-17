@@ -44,7 +44,7 @@ public class GitHubStrategyImplTest {
 //        String branchName = "feature/feature42D";
         String branchName = "master";
         String branchRevId = "1234";
-        String result = new GitHubStrategyImpl().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
         String expResult = "https://github.com/markiewb/nb-git-branch-in-statusbar/commits/master";
         assertEquals(expResult, result);
     }
@@ -56,7 +56,7 @@ public class GitHubStrategyImplTest {
 //        String branchName = "feature/feature42D";
         String branchName = "master";
         String branchRevId = "1234";
-        String result = new GitHubStrategyImpl().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
         String expResult = "https://github.com/markiewb/nb-git-branch-in-statusbar/commits/master";
         assertEquals(expResult, result);
     }
@@ -68,7 +68,7 @@ public class GitHubStrategyImplTest {
 //        String branchName = "feature/feature42D";
         String branchName = "master";
         String branchRevId = "1234";
-        String result = new GitHubStrategyImpl().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
         String expResult = "https://github.com/markiewb/nb-git-branch-in-statusbar/commits/master";
         assertEquals(expResult, result);
     }
@@ -80,7 +80,7 @@ public class GitHubStrategyImplTest {
 //        String branchName = "feature/feature42D";
         String branchName = "master";
         String branchRevId = "1234";
-        String result = new GitHubStrategyImpl().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
         String expResult = "https://github.com/markiewb/nb-git-branch-in-statusbar/commits/master";
         assertEquals(expResult, result);
     }
@@ -92,8 +92,16 @@ public class GitHubStrategyImplTest {
 //        String branchName = "feature/feature42D";
         String branchName = "master";
         String branchRevId = "1234";
-        String result = new GitHubStrategyImpl().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
         String expResult = "https://github.com/madflow/flow-netbeans-markdown/commits/master";
         assertEquals(expResult, result);
     }
+
+    private static class StrategyUnderTest extends AbstractRepoStrategy {
+
+        public StrategyUnderTest() {
+            super("github");
+        }
+    }
+
 }
