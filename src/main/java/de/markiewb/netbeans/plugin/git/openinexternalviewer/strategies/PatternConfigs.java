@@ -23,6 +23,7 @@ import java.util.List;
  * @author markiewb
  */
 class PatternConfigs {
+
     private final List<PatternConfig> patterns = new ArrayList<PatternConfig>();
 
     public void addPattern(PatternConfig pattern) {
@@ -32,5 +33,5 @@ class PatternConfigs {
     public List<PatternConfig> getPatterns() {
         return patterns;
     }
-    
+
 }

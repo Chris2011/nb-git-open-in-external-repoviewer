@@ -24,7 +24,7 @@ import java.util.regex.Matcher;
  *
  * @author markiewb
  */
-public class URIPlaceHolderResolver implements PlaceHolderResolver{
+public class URIPlaceHolderResolver implements PlaceHolderResolver {
 
     private final String URIFull;
     private final PatternConfig pattern;

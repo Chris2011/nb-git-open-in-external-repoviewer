@@ -15,8 +15,14 @@
  */
 package de.markiewb.netbeans.plugin.git.openinexternalviewer;
 
+import de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies.PatternConfig;
+import de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies.RepoStrategy;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
+import java.util.regex.Pattern;
 import org.openide.util.Exceptions;
 import org.openide.util.NbPreferences;
 
@@ -25,6 +31,55 @@ import org.openide.util.NbPreferences;
  * @author markiewb
  */
 public class Options {
+
+    public List<String> getStrategies() {
+        Preferences pref = NbPreferences.forModule(Options.class);
+        String values = pref.get("$.global.strategies", "");
+        return Arrays.asList(values.split(","));
+    }
+
+    private List<String> getSourceURLs(Preferences pref, String strategy) {
+        List<String> sourceURLs = new ArrayList<String>();
+        int i = 0;
+        while (true) {
+            //like gitblit.source.url.0
+            String sourceUrl = pref.get(strategy + ".source.url." + i, null);
+            if (null == sourceUrl) {
+                break;
+            }
+            i++;
+            sourceURLs.add(sourceUrl);
+        }
+        return sourceURLs;
+    }
+
+    public List<PatternConfig> getPatternConfigs(String strategy) {
+        Preferences pref = NbPreferences.forModule(Options.class);
+
+        List<String> sourceURLs = getSourceURLs(pref, strategy);
+        RepoStrategy.Type[] values = RepoStrategy.Type.values();
+        List<PatternConfig> configs = new ArrayList<PatternConfig>();
+        for (int i = 0; i < sourceURLs.size(); i++) {
+
+            for (RepoStrategy.Type type : values) {
+                //f.e.: gitblit.target.show_log.url.0
+                String key = strategy + ".target." + type.name().toLowerCase() + ".url." + i;
+                //f.e.: <protocol>://<server>/git/log/<repo|escapeSlashWithBang>.git/refs!heads!<branch|escapeSlashWithBang>
+                String value = pref.get(key, null);
+                if (null != value && !value.isEmpty()) {
+                    final PatternConfig config = new PatternConfig(type, Pattern.compile(sourceURLs.get(i)), value);
+                    configs.add(config);
+                }
+            }
+        }
+        return configs;
+    }
+
+    public String getLabelFromPreferences(String strategy) {
+        Preferences pref = NbPreferences.forModule(Options.class);
+
+        return pref.get(strategy + ".label", "");
+    }
 
     public void resetToDefaultIfNotExisting() {
         //only for debugging
@@ -40,7 +95,54 @@ public class Options {
     }
 
     public void resetToDefault() {
-        String d = "gitblit.label=GitBlit\n"
+        String d
+                = getDefaultConfig();
+        persist(d);
+    }
+
+    public void persist(String propertyFileContent) {
+        Preferences pref = NbPreferences.forModule(Options.class);
+        try {
+            pref.clear();
+        } catch (BackingStoreException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        String[] lines = propertyFileContent.split("\n");
+        for (String line : lines) {
+            //only the first match of '='
+            String[] keyValue = line.split("=",2);
+            if (null != keyValue && keyValue.length == 2) {
+                String key = keyValue[0];
+                String val = keyValue[1];
+                pref.put(key, val);
+            }
+        }
+        try {
+            pref.flush();
+        } catch (BackingStoreException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+
+    }
+
+    public String load(Preferences pref) {
+        StringBuilder sb = new StringBuilder();
+        String[] keys;
+        try {
+            keys = pref.keys();
+            for (String key : keys) {
+                final String value = pref.get(key, "");
+                sb.append(String.format("%s=%s\n", key, value));
+            }
+        } catch (BackingStoreException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        return sb.toString();
+    }
+
+    public static String getDefaultConfig() {
+        return "$.global.strategies=github,gitblit,bitbucket,googlecode,gitlab,gitweb\n"
+                + "gitblit.label=GitBlit\n"
                 + "gitblit.source.url.0=(?<protocol>http|https)://(?<username>.+?@)?(?<server>.+?)/(git/r)/(?<repo>.+)\\.git\n"
                 + "gitblit.source.url.1=(?<protocol>http|https)://(?<username>.+?@)?(?<server>.+?)/(git|r)/(?<repo>.+)\\.git\n"
                 + "gitblit.target.show_log.url.0=<protocol>://<server>/git/log/<repo|escapeSlashWithBang>.git/refs!heads!<branch|escapeSlashWithBang>\n"
@@ -95,29 +197,7 @@ public class Options {
                 + "gitlab.target.show_file.url.0=https://gitlab.com/<repo>/blob/<revision>/<fullfilepath>#L<linenumber|1based>\n"
                 + "gitlab.target.show_file.url.1=https://gitlab.com/<repo>/blob/<revision>/<fullfilepath>#L<linenumber|1based>\n"
                 + "gitlab.target.show_file_commitdiff.url.0=\n"
-                + "gitlab.target.show_file_commitdiff.url.1=\n"
-                ;
-        Preferences pref = NbPreferences.forModule(Options.class);
-        try {
-            pref.clear();
-        } catch (BackingStoreException ex) {
-            Exceptions.printStackTrace(ex);
-        }
-        String[] lines = d.split("\n");
-        for (String line : lines) {
-            //only the first match of '='
-            String[] keyValue = line.split("=",2);
-            if (null != keyValue && keyValue.length == 2) {
-                String key = keyValue[0];
-                String val = keyValue[1];
-                pref.put(key, val);
-            }
-        }
-        try {
-            pref.flush();
-        } catch (BackingStoreException ex) {
-            Exceptions.printStackTrace(ex);
-        }
+                + "gitlab.target.show_file_commitdiff.url.1=\n";
     }
 
 }

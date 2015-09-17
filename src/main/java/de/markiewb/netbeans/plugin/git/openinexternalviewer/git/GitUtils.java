@@ -55,6 +55,7 @@ public class GitUtils {
         }
         return Collections.emptyList();
     }
+
     /**
      *
      * @param f
@@ -87,7 +88,7 @@ public class GitUtils {
                 return null;
             }
             return uris.get(0);
-            
+
         } catch (GitException ex) {
             Exceptions.printStackTrace(ex);
         } finally {
@@ -97,6 +98,7 @@ public class GitUtils {
         }
         return null;
     }
+
     public static GitBranch getActiveBranch(final FileObject f) {
         for (GitBranch branch : getBranches(f, true)) {
             if (branch.isActive()) {

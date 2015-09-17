@@ -35,10 +35,10 @@ class PatternMatcher {
     private List<PatternConfig> filterByType(List<PatternConfig> patterns, RepoStrategy.Type type) {
         List<PatternConfig> result = new ArrayList<PatternConfig>();
         for (PatternConfig pattern : patterns) {
-            if (null!=type && null!=pattern){
-            if (type.equals(pattern.getType())) {
-                result.add(pattern);
-            }
+            if (null != type && null != pattern) {
+                if (type.equals(pattern.getType())) {
+                    result.add(pattern);
+                }
             }
         }
         return result;

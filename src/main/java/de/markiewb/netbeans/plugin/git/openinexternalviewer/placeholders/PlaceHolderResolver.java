@@ -22,5 +22,6 @@ import java.util.Map;
  * @author markiewb
  */
 public interface PlaceHolderResolver {
+
     Map<String, String> resolve();
 }

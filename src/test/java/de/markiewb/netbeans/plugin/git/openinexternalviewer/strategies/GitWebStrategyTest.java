@@ -42,8 +42,16 @@ public class GitWebStrategyTest {
         String remote = "http://devel.dolmen-project.org/dolmen.menu.git";
         String branchName = "master";
         String branchRevId = "1234";
-        String result = new GitWebStrategyImpl().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
         String expResult = "http://gitweb.dolmen-project.org/dolmen.menu.git/shortlog/refs/heads/master";
         assertEquals(expResult, result);
     }
+
+    private static class StrategyUnderTest extends AbstractRepoStrategy {
+
+        public StrategyUnderTest() {
+            super("gitweb");
+        }
+    }
+
 }

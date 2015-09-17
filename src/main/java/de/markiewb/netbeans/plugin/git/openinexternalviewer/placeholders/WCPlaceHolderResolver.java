@@ -22,7 +22,7 @@ import java.util.Map;
  *
  * @author markiewb
  */
-public class WCPlaceHolderResolver implements PlaceHolderResolver{
+public class WCPlaceHolderResolver implements PlaceHolderResolver {
 
     private final String branch;
     private final String revision;

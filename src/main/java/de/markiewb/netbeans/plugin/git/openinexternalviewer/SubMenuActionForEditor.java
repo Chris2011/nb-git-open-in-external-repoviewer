@@ -19,22 +19,18 @@ import de.markiewb.netbeans.plugin.git.openinexternalviewer.actions.AbstractRepo
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies.RepoStrategy;
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies.RepoStrategy.Type;
 import java.util.EnumSet;
-import java.util.logging.Logger;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
-import org.openide.util.NbBundle;
 
 @ActionID(category = "Git", id = "de.markiewb.netbeans.plugin.git.openinexternalviewer.SubMenuActionForEditor")
 @ActionRegistration(lazy = false, displayName = "openinexternalviewer.SubMenuActionForEditor")
 @ActionReferences({
     @ActionReference(path = "Editors/Popup", position = 500)
 })
-@NbBundle.Messages("LBL_SubMenuActionForEditor=???")
 public final class SubMenuActionForEditor extends AbstractRepositoryPopupAction {
 
-    private static final Logger LOG = Logger.getLogger(SubMenuActionForEditor.class.getName());
     private final EnumSet<RepoStrategy.Type> SUPPORTEDTYPES = EnumSet.of(RepoStrategy.Type.SHOW_FILE_HISTORY, RepoStrategy.Type.SHOW_FILE, RepoStrategy.Type.SHOW_FILE_COMMITDIFF);
 
     @Override

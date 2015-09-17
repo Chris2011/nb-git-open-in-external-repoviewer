@@ -42,7 +42,7 @@ public class GoogleCodeStrategyImplTest {
         String remote = "https://code.google.com/p/gitblit/";
         String branchName = "bootstrap";
         String branchRevId = "1234";
-        String result = new GoogleCodeStrategyImpl().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
         String expResult = "https://code.google.com/p/gitblit/source/list?name=bootstrap";
         assertEquals(expResult, result);
     }
@@ -52,9 +52,16 @@ public class GoogleCodeStrategyImplTest {
         String remote = "https://john.doe@code.google.com/p/nb-close-other-projects/";
         String branchName = "master";
         String branchRevId = "1234";
-        String result = new GoogleCodeStrategyImpl().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_LOG, remote, x(branchName, branchRevId));
         String expResult = "https://code.google.com/p/nb-close-other-projects/source/list?name=master";
         assertEquals(expResult, result);
+    }
+
+    private static class StrategyUnderTest extends AbstractRepoStrategy {
+
+        public StrategyUnderTest() {
+            super("googlecode");
+        }
     }
 
 }
