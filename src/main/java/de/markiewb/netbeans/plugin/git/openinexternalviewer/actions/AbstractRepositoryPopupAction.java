@@ -95,7 +95,7 @@ public abstract class AbstractRepositoryPopupAction extends AbstractAction imple
         setEnabled(false);
         //only support one project selected project
         Collection<? extends FileObject> lookupAll = lkp.lookupAll(FileObject.class);
-        if (lookupAll.size() >= 2) {
+        if (lookupAll.size() != 1) {
             return result;
         }
         final FileObject fileObject = lookupAll.iterator().next();
