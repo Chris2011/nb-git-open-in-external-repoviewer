@@ -41,12 +41,13 @@ public class FileObjectPlaceHolderResolver implements PlaceHolderResolver {
 
         Integer linenumber;
         String relativePath;
+        String fileName;
     }
 
     @Override
     public Map<String, String> resolve() {
         Config config = initFromEditor(fo, gitRepoDirectory);
-        Map<String, String> result = new HashMap<String, String>();
+        Map<String, String> result = new HashMap<>();
         if (null != config.linenumber) {
             result.put("<linenumber\\|0based>", config.linenumber.toString());
             result.put("<linenumber\\|1based>", String.valueOf(config.linenumber + 1));
@@ -57,6 +58,9 @@ public class FileObjectPlaceHolderResolver implements PlaceHolderResolver {
         if (null != config.relativePath) {
             result.put("<fullfilepath>", config.relativePath);
             result.put("<fullfilepath\\|escapeSlashWithBang>", escapeSlashWithBang(config.relativePath));
+        }
+        if (null != config.fileName) {
+            result.put("<filename>", config.fileName);
         }
         return result;
     }
@@ -69,6 +73,7 @@ public class FileObjectPlaceHolderResolver implements PlaceHolderResolver {
         }
         if (null != fileObject) {
             result.relativePath = org.openide.filesystems.FileUtil.getRelativePath(gitRepoDirectory, fileObject);
+            result.fileName = fileObject.getNameExt();
         }
         return result;
     }
