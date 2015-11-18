@@ -20,12 +20,21 @@ import org.openide.filesystems.FileObject;
 
 public class MockedEditorPlaceHolderResolver extends EditorPlaceHolderResolver {
 
+    private final String fileName;
     private final Integer linenumber;
     private final String relativePath;
 
     public MockedEditorPlaceHolderResolver(String relativePath, Integer linenumber) {
         super(null, null);
         this.relativePath = relativePath;
+        this.linenumber = linenumber;
+        this.fileName = null;
+    }
+
+    public MockedEditorPlaceHolderResolver(String relativePath, String fileName, Integer linenumber) {
+        super(null, null);
+        this.relativePath = relativePath;
+        this.fileName = fileName;
         this.linenumber = linenumber;
     }
 
@@ -34,6 +43,7 @@ public class MockedEditorPlaceHolderResolver extends EditorPlaceHolderResolver {
         final Config config = new Config();
         config.linenumber = linenumber;
         config.relativePath = relativePath;
+        config.fileName = fileName;
         return config;
     }
 
