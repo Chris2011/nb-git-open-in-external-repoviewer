@@ -5,11 +5,14 @@
  */
 package de.markiewb.netbeans.plugin.git.openinexternalviewer.options;
 
+import de.markiewb.netbeans.plugin.git.openinexternalviewer.ConfigurationMigratorAtStartup;
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.Options;
 import java.awt.Rectangle;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Logger;
 import java.util.prefs.Preferences;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import org.openide.awt.HtmlBrowser;
@@ -19,11 +22,15 @@ import org.openide.util.NbPreferences;
 @org.netbeans.spi.options.OptionsPanelController.Keywords(location = "Team", tabTitle = "Open URL of GIT repository hoster", keywords = {"git", "repo", "repository", "url"})
 final class ConfigPanel extends javax.swing.JPanel {
 
+    private static final Logger LOG = Logger.getLogger(ConfigPanel.class.getName());
+
     private final ConfigOptionsPanelController controller;
 
     ConfigPanel(final ConfigOptionsPanelController controller) {
         this.controller = controller;
         initComponents();
+        //enable it for debugging purposes
+        btnCalcMD5.setVisible(false);
 
         jEditorPane1.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -56,6 +63,7 @@ final class ConfigPanel extends javax.swing.JPanel {
         btnDonate = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
+        btnCalcMD5 = new javax.swing.JButton();
 
         org.openide.awt.Mnemonics.setLocalizedText(btnReset, org.openide.util.NbBundle.getMessage(ConfigPanel.class, "ConfigPanel.btnReset.text")); // NOI18N
         btnReset.addActionListener(new java.awt.event.ActionListener() {
@@ -81,6 +89,13 @@ final class ConfigPanel extends javax.swing.JPanel {
         jEditorPane1.setContentType("text/x-properties"); // NOI18N
         jScrollPane1.setViewportView(jEditorPane1);
 
+        org.openide.awt.Mnemonics.setLocalizedText(btnCalcMD5, org.openide.util.NbBundle.getMessage(ConfigPanel.class, "ConfigPanel.btnCalcMD5.text")); // NOI18N
+        btnCalcMD5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcMD5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,9 +105,11 @@ final class ConfigPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVisitHomePage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDonate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReset, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnVisitHomePage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDonate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnReset, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCalcMD5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -102,6 +119,8 @@ final class ConfigPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnReset)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCalcMD5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnVisitHomePage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -132,6 +151,18 @@ final class ConfigPanel extends javax.swing.JPanel {
         setConfigText(defaultConfig);
     }//GEN-LAST:event_btnResetActionPerformed
 
+    private void btnCalcMD5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcMD5ActionPerformed
+        String defaultConfig = Options.getDefaultConfig();
+        Preferences pref = NbPreferences.forModule(Options.class);
+        String loadedConf = new Options().load(pref);
+        String defaultMD5 = ConfigurationMigratorAtStartup.getMD5(defaultConfig);
+        String loadedMD5 = ConfigurationMigratorAtStartup.getMD5(loadedConf);
+        JOptionPane.showMessageDialog(this, String.format("loaded: %s / default: %s", loadedMD5, defaultMD5));
+        LOG.info(String.format("MD5 of loaded configuration: %s", loadedMD5));
+        LOG.info(String.format("MD5 of default configuration: %s", defaultMD5));
+        
+    }//GEN-LAST:event_btnCalcMD5ActionPerformed
+
     void load() {
         new Options().resetToDefaultIfNotExisting();
         Preferences pref = NbPreferences.forModule(Options.class);
@@ -156,6 +187,7 @@ final class ConfigPanel extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCalcMD5;
     private javax.swing.JLabel btnDonate;
     private javax.swing.JButton btnReset;
     private javax.swing.JLabel btnVisitHomePage;

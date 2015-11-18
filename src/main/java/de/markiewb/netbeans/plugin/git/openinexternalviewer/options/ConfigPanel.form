@@ -21,11 +21,14 @@
               <Component id="jScrollPane1" pref="229" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnVisitHomePage" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnDonate" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnReset" alignment="1" min="-2" pref="149" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnVisitHomePage" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnDonate" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnReset" alignment="1" min="-2" pref="149" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="btnCalcMD5" alignment="1" min="-2" pref="149" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -36,6 +39,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="btnReset" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnCalcMD5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnVisitHomePage" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -90,5 +95,15 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btnCalcMD5">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="de/markiewb/netbeans/plugin/git/openinexternalviewer/options/Bundle.properties" key="ConfigPanel.btnCalcMD5.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCalcMD5ActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>
