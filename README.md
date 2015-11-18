@@ -15,15 +15,15 @@ Following actions are added to the project context menu:
 <ul>
 <li>"<i>Show log</i>"<p>Open the commit overview/history view for the current branch</p></li>
 <li>"<i>Show commit</i>"<p>Open the commit for the current revision (where implemented)</p></li>
-<li>"<i>Show diff</i>"<p>Open the commit diff for the current revision (where implemented)</p></li>
-<li>"<i>Create pull request</i>'<p>Open a website to create a pull request (where implemented)</p></li>
+<li>"<i>Show diff</i>"<p>Open the commit diff for the current revision (where implemented: currently github, gitblit, gitlab)</p></li>
+<li>"<i>Create pull request</i>'<p>Open a website to create a pull request (where implemented: currently bitbucket)</p></li>
 </ul>
 </p>
 <p>
 Following actions are added to the context menu of the editor tab:
 <ul>
-<li>"<i>Show file</i>"<p>Open the current file for the current revision (where implemented)</p></li>
-<li>"<i>Show file history</i>"<p>Open the history view of the current file (where implemented)</p></li>
+<li>"<i>Show file</i>"<p>Open the current file for the current revision (where implemented: currently gitblit, bitbucket, github, gitlab)</p></li>
+<li>"<i>Show file history</i>"<p>Open the history view of the current file (where implemented: currently gitblit, bitbucket, github, gitlab)</p></li>
 </ul>
 </p>
 
@@ -31,6 +31,19 @@ Following actions are added to the context menu of the editor tab:
 
 <p>Currently supported patterns: GitBlit, gitlab.com, bitbucket.org, github.com, code.google.com, GitWeb</p>
 
+
+<h2>Updates in 1.4.1:</h2>
+<ul>
+<li>[<a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/28">Issue 28</a>]: Open file, open file history and commit diff actions for github.com </li>
+<li>[<a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/pull/32">Issue 32</a>]: Open file, open file history actions for bitbucket (PR by @mkleint)</li>
+<li>[<a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/33">Issue 33</a>]: Migrator for new patterns (<b>NOTE</b>: If you altered the pattern configuration manually in the previous version then the migration cannot be done automatically. You have to reset the configuration in the options and reintroduce your changed manually.)</li>
+
+</ul>
+
+<h2>Updates in 1.4.0.2:</h2>
+<ul>
+<li>[<a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/30">Issue 30</a>]: Fixed NoSuchElementException</li>
+</ul>
 
 <h2>Updates in 1.4.0:</h2>
 <ul>
