@@ -15,6 +15,8 @@
  */
 package de.markiewb.netbeans.plugin.git.openinexternalviewer.strategies;
 
+import de.markiewb.netbeans.plugin.git.openinexternalviewer.placeholders.EditorPlaceHolderResolver;
+import de.markiewb.netbeans.plugin.git.openinexternalviewer.placeholders.MockedEditorPlaceHolderResolver;
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.placeholders.PlaceHolderResolvers;
 import de.markiewb.netbeans.plugin.git.openinexternalviewer.placeholders.WCPlaceHolderResolver;
 import static org.junit.Assert.assertEquals;
@@ -29,6 +31,13 @@ public class BitBucketStrategyTest {
     private PlaceHolderResolvers x(String branchName, String branchRevId) {
         WCPlaceHolderResolver wcPlaceHolderResolver = new WCPlaceHolderResolver(branchName, branchRevId);
         PlaceHolderResolvers resolvers = new PlaceHolderResolvers(wcPlaceHolderResolver);
+        return resolvers;
+    }
+
+    private PlaceHolderResolvers x(String branchName, String branchRevId, String fullFilePath, String fileName, Integer linenumber0Based) {
+        WCPlaceHolderResolver wcPlaceHolderResolver = new WCPlaceHolderResolver(branchName, branchRevId);
+        EditorPlaceHolderResolver mockedEditorPlaceHolderResolver = new MockedEditorPlaceHolderResolver(fullFilePath, fileName, linenumber0Based);
+        PlaceHolderResolvers resolvers = new PlaceHolderResolvers(wcPlaceHolderResolver, mockedEditorPlaceHolderResolver);
         return resolvers;
     }
 
@@ -82,6 +91,62 @@ public class BitBucketStrategyTest {
         String branchRevId = "1234";
         String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.PULL_REQUEST, remote, x(branchName, branchRevId));
         String expResult = "https://bitbucket.org/elbrecht/git-blog-examples/pull-request/new?source=elbrecht/git-blog-examples::branch1";
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testShowFile() {
+        String remote = "https://user@bitbucket.org/elbrecht/git-blog-examples.git";
+        String branchName = "master";
+        String branchRevId = "9eb37c6786f71f25afd80f93e8013c6bc12b0a34";
+        String fullFilePath = "shortableEntity/pom.xml";
+        String fileName = "pom.xml";
+        Integer linenumber0Based = 14;
+
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_FILE, remote, x(branchName, branchRevId, fullFilePath, fileName, linenumber0Based));
+        String expResult = "https://bitbucket.org/elbrecht/git-blog-examples/src/9eb37c6786f71f25afd80f93e8013c6bc12b0a34/shortableEntity/pom.xml?at=master&fileviewer=file-view-default#pom.xml-15";
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testShowFile2() {
+        String remote = "git@bitbucket.org:elbrecht/git-blog-examples.git";
+        String branchName = "master";
+        String branchRevId = "9eb37c6786f71f25afd80f93e8013c6bc12b0a34";
+        String fullFilePath = "shortableEntity/pom.xml";
+        String fileName = "pom.xml";
+        Integer linenumber0Based = 14;
+
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_FILE, remote, x(branchName, branchRevId, fullFilePath, fileName, linenumber0Based));
+        String expResult = "https://bitbucket.org/elbrecht/git-blog-examples/src/9eb37c6786f71f25afd80f93e8013c6bc12b0a34/shortableEntity/pom.xml?at=master&fileviewer=file-view-default#pom.xml-15";
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testShowFileHistory() {
+        String remote = "https://user@bitbucket.org/elbrecht/git-blog-examples.git";
+        String branchName = "master";
+        String branchRevId = "9eb37c6786f71f25afd80f93e8013c6bc12b0a34";
+        String fullFilePath = "shortableEntity/pom.xml";
+        String fileName = "pom.xml";
+        Integer linenumber0Based = 14;
+
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_FILE_HISTORY, remote, x(branchName, branchRevId, fullFilePath, fileName, linenumber0Based));
+        String expResult = "https://bitbucket.org/elbrecht/git-blog-examples/history-node/master/shortableEntity/pom.xml?at=master";
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testShowFileHistory2() {
+        String remote = "git@bitbucket.org:elbrecht/git-blog-examples.git";
+        String branchName = "master";
+        String branchRevId = "9eb37c6786f71f25afd80f93e8013c6bc12b0a34";
+        String fullFilePath = "shortableEntity/pom.xml";
+        String fileName = "pom.xml";
+        Integer linenumber0Based = 14;
+
+        String result = new StrategyUnderTest().getUrl(RepoStrategy.Type.SHOW_FILE_HISTORY, remote, x(branchName, branchRevId, fullFilePath, fileName, linenumber0Based));
+        String expResult = "https://bitbucket.org/elbrecht/git-blog-examples/history-node/master/shortableEntity/pom.xml?at=master";
         assertEquals(expResult, result);
     }
 
