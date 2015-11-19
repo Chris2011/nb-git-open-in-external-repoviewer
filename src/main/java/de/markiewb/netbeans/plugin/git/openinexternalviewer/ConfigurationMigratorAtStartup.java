@@ -18,6 +18,8 @@ package de.markiewb.netbeans.plugin.git.openinexternalviewer;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 import org.openide.modules.OnStart;
@@ -32,32 +34,24 @@ import org.openide.util.NbPreferences;
 public class ConfigurationMigratorAtStartup implements Runnable {
 
     private static final Logger LOG = Logger.getLogger(ConfigurationMigratorAtStartup.class.getName());
-    private static final String MD5_1_4_0_2_sorted = "2813f23fc064cc1830be58909f2201c6";
-    private static final String MD5_1_4_0_2_unsorted = "bd3017009088330c55feebf67fce931d";
-    private static final String MD5_1_4_1 = "ea7fc67482b391f2660d64ad04606b41";
+    private static final List<String> MD5_1_4_0_2 = Arrays.asList("2813f23fc064cc1830be58909f2201c6", "bd3017009088330c55feebf67fce931d", "3b9367f6e223343fc1d53487a9527a54");
+    private static final List<String> MD5_1_4_1 = Arrays.asList("ea7fc67482b391f2660d64ad04606b41");
 
     @Override
     public void run() {
         Preferences pref = NbPreferences.forModule(Options.class);
         String load = new Options().load(pref);
         if (null == load || load.isEmpty()) {
-            //no config found, a fresh new installation -> nothing to migrate
             LOG.fine("no config found, it is a fresh new installation -> nothing to migrate");
-            return;
-        }
-        String mD5 = getMD5(load);
-        if (MD5_1_4_1.equals(mD5)) {
-            LOG.fine("Found a configuration from the newest version -> NOP");
-            return;
-        }
-        if (MD5_1_4_0_2_sorted.equals(mD5)) {
-            //found the old configuration from 1.4.0.2 -> reset to new configuration
-            LOG.info("Found the old configuration from 1.4.0.2 -> reset to new configuration");
             new Options().resetToDefault();
             return;
         }
-        if (MD5_1_4_0_2_unsorted.equals(mD5)) {
-            //found the old configuration from 1.4.0.2 -> reset to new configuration
+        String mD5 = getMD5(load);
+        if (MD5_1_4_1.contains(mD5)) {
+            LOG.fine("Found a configuration from the newest version -> NOP");
+            return;
+        }
+        if (MD5_1_4_0_2.contains(mD5)) {
             LOG.info("Found the old configuration from 1.4.0.2 -> reset to new configuration");
             new Options().resetToDefault();
             return;

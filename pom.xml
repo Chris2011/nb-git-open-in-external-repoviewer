@@ -4,7 +4,7 @@
 
     <groupId>de.markiewb.netbeans.plugins</groupId>
     <artifactId>open.url.of.git.repository.hoster</artifactId>
-    <version>1.4.1.0-SNAPSHOT</version>
+    <version>1.4.1.1-SNAPSHOT</version>
     <packaging>nbm</packaging>
 
     <name>Open URL of GIT repository hoster</name>
@@ -138,6 +138,7 @@
                     <keystore>nbproject/private/keystore</keystore>
                     <keystorealias>myself</keystorealias>
                     <licenseName>Apache 2.0</licenseName>
+                    <netbeansUserdir>${project.build.directory}/../userdir</netbeansUserdir>
                 </configuration>
             </plugin>
 
@@ -191,6 +192,10 @@ Following actions are added to the context menu of the editor tab:
 
 &lt;p&gt;Currently supported patterns: GitBlit, gitlab.com, bitbucket.org, github.com, code.google.com, GitWeb&lt;/p&gt;
 
+&lt;h2&gt;Updates in 1.4.1.1:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/34"&gt;Issue 34&lt;/a&gt;]: Configuration-Migrator from 1.4.0.2 to 1.4.1.0 does not work &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2&gt;Updates in 1.4.1:&lt;/h2&gt;
 &lt;ul&gt;
