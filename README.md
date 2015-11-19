@@ -31,6 +31,10 @@ Following actions are added to the context menu of the editor tab:
 
 <p>Currently supported patterns: GitBlit, gitlab.com, bitbucket.org, github.com, code.google.com, GitWeb</p>
 
+<h2>Updates in 1.4.1.1:</h2>
+<ul>
+<li>[<a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/34">Issue 34</a>]: Configuration-Migrator from 1.4.0.2 to 1.4.1.0 does not work </li>
+</ul>
 
 <h2>Updates in 1.4.1:</h2>
 <ul>
