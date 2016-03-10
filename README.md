@@ -32,9 +32,11 @@ Following actions are added to the context menu of the editor tab:
 <p>Currently supported patterns: GitBlit, gitlab.com, bitbucket.org, github.com, code.google.com, GitWeb</p>
 
 
-<h2>Updates in 1.4.2:</h2>
+<h2>Updates in 1.4.2.1:</h2>
 <ul>
+<li>[<a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/35">Feature 35</a>]: Add possibility to add keyboard shortcuts. Configure them at Tools|Options|Keymap</li>
 <li>[<a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/36">Bugfix 36</a>]: Fixed: Use configured browser to open links. Configure it at Tools|Options|General|Web Browser</li>
+<li>[<a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/31">Bugfix 31</a>]: Fixed: WARNING [org.openide.util.Utilities]: findContextMenuImpl, getPopupPresenter returning null for</li>
 </ul>
 
 <h2>Updates in 1.4.1.1:</h2>

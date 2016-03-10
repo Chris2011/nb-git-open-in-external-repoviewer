@@ -39,6 +39,7 @@ import javax.swing.text.JTextComponent;
 import org.netbeans.api.editor.EditorRegistry;
 import org.netbeans.editor.BaseDocument;
 import org.netbeans.libs.git.GitBranch;
+import org.openide.awt.DynamicMenuContent;
 import org.openide.filesystems.FileObject;
 import org.openide.util.Lookup;
 import org.openide.util.Utilities;
@@ -87,7 +88,10 @@ public abstract class AbstractRepositoryPopupAction extends AbstractAction imple
         final Lookup lookup = Utilities.actionsGlobalContext();
         JMenu main = createMenu(lookup);
         if (null == main) {
-            return null;
+            final JMenuItem invisibleMenuItem = new JMenuItem();
+            invisibleMenuItem.setEnabled(false);
+            invisibleMenuItem.putClientProperty(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
+            return invisibleMenuItem;
         }
 
         setEnabled(main.getMenuComponentCount() > 0);

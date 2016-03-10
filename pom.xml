@@ -198,6 +198,8 @@ You can configure shortcuts for each action at Tools|Options|Keymap. Filter for 
 &lt;ul&gt;
 &lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/35"&gt;Feature 35&lt;/a&gt;]: Add possibility to add keyboard shortcuts. Configure them at Tools|Options|Keymap&lt;/li&gt;
 &lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/36"&gt;Bugfix 36&lt;/a&gt;]: Fixed: Use configured browser to open links. Configure it at Tools|Options|General|Web Browser&lt;/li&gt;
+&lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/31"&gt;Bugfix 31&lt;/a&gt;]: Fixed: WARNING [org.openide.util.Utilities]: findContextMenuImpl, getPopupPresenter returning null for&lt;/li&gt;
+
 &lt;/ul&gt;
 
 &lt;h2&gt;Updates in 1.4.1.1:&lt;/h2&gt;
