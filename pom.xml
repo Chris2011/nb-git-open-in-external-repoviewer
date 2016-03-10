@@ -4,7 +4,7 @@
 
     <groupId>de.markiewb.netbeans.plugins</groupId>
     <artifactId>open.url.of.git.repository.hoster</artifactId>
-    <version>1.4.2.0</version>
+    <version>1.4.2.1</version>
     <packaging>nbm</packaging>
 
     <name>Open URL of GIT repository hoster</name>
@@ -187,14 +187,16 @@ Following actions are added to the context menu of the editor tab:
 &lt;li&gt;"&lt;i&gt;Show file history&lt;/i&gt;"&lt;p&gt;Open the history view of the current file (where implemented: currently gitblit, bitbucket, github, gitlab)&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/p&gt;
+You can configure shortcuts for each action at Tools|Options|Keymap. Filter for the actions with the name "* (in browser)" in the category "Git".
 
 &lt;img src="https://raw.github.com/markiewb/nb-git-open-in-external-repoviewer/master/doc/1.4.0.png"/&gt;
 
 &lt;p&gt;Currently supported patterns: GitBlit, gitlab.com, bitbucket.org, github.com, code.google.com, GitWeb&lt;/p&gt;
 
 
-&lt;h2&gt;Updates in 1.4.2:&lt;/h2&gt;
+&lt;h2&gt;Updates in 1.4.2.1:&lt;/h2&gt;
 &lt;ul&gt;
+&lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/35"&gt;Feature 35&lt;/a&gt;]: Add possibility to add keyboard shortcuts. Configure them at Tools|Options|Keymap&lt;/li&gt;
 &lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/36"&gt;Bugfix 36&lt;/a&gt;]: Fixed: Use configured browser to open links. Configure it at Tools|Options|General|Web Browser&lt;/li&gt;
 &lt;/ul&gt;
 

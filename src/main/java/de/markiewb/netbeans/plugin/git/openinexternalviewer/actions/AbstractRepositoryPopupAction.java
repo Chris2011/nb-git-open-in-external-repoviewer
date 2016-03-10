@@ -58,18 +58,39 @@ public abstract class AbstractRepositoryPopupAction extends AbstractAction imple
         //NOP
     }
 
-    @Override
-    public JMenuItem getPopupPresenter() {
-        RepoStrategyConfig config = detectRepositoryStrategy();
+    /**
+     * Like
+     * <pre>
+     * Github
+     *    Show Log
+     *    Show XXX
+     * </pre>
+     *
+     * @param lookup
+     * @return
+     */
+    public JMenu createMenu(final Lookup lookup) {
+        RepoStrategyConfig config = detectRepositoryStrategy(lookup);
         if (null == config) {
             return null;
         }
         JMenu main = new JMenu(config.strategy.getLabel());
         List<JMenuItem> items = createMenuItems(config);
-        setEnabled(!items.isEmpty());
         for (JMenuItem item : items) {
             main.add(item);
         }
+        return main;
+    }
+
+    @Override
+    public JMenuItem getPopupPresenter() {
+        final Lookup lookup = Utilities.actionsGlobalContext();
+        JMenu main = createMenu(lookup);
+        if (null == main) {
+            return null;
+        }
+
+        setEnabled(main.getMenuComponentCount() > 0);
         return main;
     }
 
@@ -89,11 +110,10 @@ public abstract class AbstractRepositoryPopupAction extends AbstractAction imple
         return items;
     }
 
-    protected RepoStrategyConfig detectRepositoryStrategy() {
-        Lookup lkp = Utilities.actionsGlobalContext();
+    protected RepoStrategyConfig detectRepositoryStrategy(Lookup lkp) {
         RepoStrategyConfig result = null;
         setEnabled(false);
-        //only support one project selected project
+        //only support one selected project
         Collection<? extends FileObject> lookupAll = lkp.lookupAll(FileObject.class);
         if (lookupAll.size() != 1) {
             return result;
