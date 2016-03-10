@@ -28,12 +28,10 @@ import org.openide.util.Exceptions;
  */
 public class OpenURLAction extends AbstractAction {
 
-    private final AbstractRepositoryPopupAction outer;
     private final String url;
     public String label;
 
-    public OpenURLAction(String url, String label, final AbstractRepositoryPopupAction outer) {
-        this.outer = outer;
+    public OpenURLAction(String url, String label) {
         this.url = url;
         this.label = label;
         putValue(NAME, label);

@@ -83,7 +83,7 @@ public abstract class AbstractRepositoryPopupAction extends AbstractAction imple
             if (null == url) {
                 continue;
             }
-            JMenuItem jMenuItem = new JMenuItem(new OpenURLAction(url, type.getLabel(), this));
+            JMenuItem jMenuItem = new JMenuItem(new OpenURLAction(url, type.getLabel()));
             items.add(jMenuItem);
         }
         return items;
