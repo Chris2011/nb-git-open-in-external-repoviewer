@@ -42,7 +42,7 @@ public class OpenURLAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            HtmlBrowser.URLDisplayer.getDefault().showURLExternal(new URL(url));
+            HtmlBrowser.URLDisplayer.getDefault().showURL(new URL(url));
         } catch (MalformedURLException ex) {
             Exceptions.printStackTrace(ex);
         }

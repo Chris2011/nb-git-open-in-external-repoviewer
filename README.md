@@ -9,7 +9,7 @@ NetBeans Plugin which opens the Web UI of the Git repository you cloned from.
 See http://plugins.netbeans.org/plugin/49930/open-url-of-git-repository-hoster
 
 This plugins adds git-related actions to the context menu of a GIT-versioned project OR of the tab context menu.
-Internally it parses the GIT URL of the project, generates specific URLs for the GIT repository hoster and opens the URL in the external browser.
+Internally it parses the GIT URL of the project, generates specific URLs for the GIT repository hoster and opens the URL in the browser. The browser is configurable at Tools|Options|General|Web Browser.
 <p>
 Following actions are added to the project context menu:
 <ul>
@@ -30,6 +30,12 @@ Following actions are added to the context menu of the editor tab:
 <img src="https://raw.github.com/markiewb/nb-git-open-in-external-repoviewer/master/doc/1.4.0.png"/>
 
 <p>Currently supported patterns: GitBlit, gitlab.com, bitbucket.org, github.com, code.google.com, GitWeb</p>
+
+
+<h2>Updates in 1.4.2:</h2>
+<ul>
+<li>[<a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/36">Bugfix 36</a>]: Fixed: Use configured browser to open links. Configure it at Tools|Options|General|Web Browser</li>
+</ul>
 
 <h2>Updates in 1.4.1.1:</h2>
 <ul>

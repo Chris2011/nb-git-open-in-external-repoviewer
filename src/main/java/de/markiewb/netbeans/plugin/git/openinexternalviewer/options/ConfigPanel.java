@@ -132,7 +132,7 @@ final class ConfigPanel extends javax.swing.JPanel {
 
     private void btnVisitHomePageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVisitHomePageMouseClicked
         try {
-            HtmlBrowser.URLDisplayer.getDefault().showURLExternal(new URL("https://github.com/markiewb/nb-git-open-in-external-repoviewer/"));
+            HtmlBrowser.URLDisplayer.getDefault().showURL(new URL("https://github.com/markiewb/nb-git-open-in-external-repoviewer/"));
         } catch (MalformedURLException ex) {
             Exceptions.printStackTrace(ex);
         }
@@ -140,7 +140,7 @@ final class ConfigPanel extends javax.swing.JPanel {
 
     private void btnDonateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDonateMouseClicked
         try {
-            HtmlBrowser.URLDisplayer.getDefault().showURLExternal(new URL("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K4CMP92RZELE2"));
+            HtmlBrowser.URLDisplayer.getDefault().showURL(new URL("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K4CMP92RZELE2"));
         } catch (MalformedURLException ex) {
             Exceptions.printStackTrace(ex);
         }
