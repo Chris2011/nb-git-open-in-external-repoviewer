@@ -26,6 +26,7 @@ Following actions are added to the context menu of the editor tab:
 <li>"<i>Show file history</i>"<p>Open the history view of the current file (where implemented: currently gitblit, bitbucket, github, gitlab)</p></li>
 </ul>
 </p>
+You can configure shortcuts for each action at Tools|Options|Keymap. Filter for the actions with the name "* (in browser)" in the category "Git".
 
 <img src="https://raw.github.com/markiewb/nb-git-open-in-external-repoviewer/master/doc/1.4.0.png"/>
 
