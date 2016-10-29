@@ -28,6 +28,7 @@ import org.openide.awt.ActionRegistration;
 @ActionRegistration(lazy = false, displayName = "openinexternalviewer.SubMenuActionForEditor")
 @ActionReferences({
     @ActionReference(path = "Editors/TabActions", position = 299),
+    @ActionReference(path="Editors/Popup", position = 5000)
 })
 public final class SubMenuActionForEditor extends AbstractRepositoryPopupAction {
 
