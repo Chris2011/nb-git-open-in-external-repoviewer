@@ -141,7 +141,7 @@ public class Options {
     }
 
     public static String getDefaultConfig() {
-        return "$.global.strategies=github,gitblit,bitbucket,googlecode,gitlab,gitweb\n"
+        return "$.global.strategies=github,gitblit,bitbucket,gitlab,gitweb\n"
                 + "bitbucket.label=BitBucket\n"
                 + "bitbucket.source.url.0=(?<protocol>https)://(?<username>.+?@)?bitbucket\\.org/(?<repo>.+)\\.git\n"
                 + "bitbucket.source.url.1=(?<username>git)@bitbucket\\.org:(?<repo>.+)\\.git\n"
@@ -206,10 +206,7 @@ public class Options {
                 + "gitlab.target.show_log.url.1=https://gitlab.com/<repo>/commits/<branch>\n"
                 + "gitweb.label=GitWeb\n"
                 + "gitweb.source.url.0=(?<protocol>http|https)://(.*?)\\.(?<server>.+?)/(?<repo>.+).git\n"
-                + "gitweb.target.show_log.url.0=<protocol>://gitweb.<server>/<repo>.git/shortlog/refs/heads/<branch>\n"
-                + "googlecode.label=Google Code\n"
-                + "googlecode.source.url.0=(?<protocol>http|https)://(?<username>.*?)@?code\\.google\\.com/p/(?<repo>.+?)/\n"
-                + "googlecode.target.show_log.url.0=<protocol>://code.google.com/p/<repo>/source/list?name=<branch>\n".trim();
+                + "gitweb.target.show_log.url.0=<protocol>://gitweb.<server>/<repo>.git/shortlog/refs/heads/<branch>\n".trim();
     }
 
 }

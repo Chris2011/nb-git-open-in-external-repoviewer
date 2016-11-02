@@ -28,14 +28,15 @@ Following actions are added to the context menu of the editor and its tab:
 </p>
 You can configure shortcuts for each action at Tools|Options|Keymap. Filter for the actions with the name "* (in browser)" in the category "Git".
 
-<img src="https://raw.github.com/markiewb/nb-git-open-in-external-repoviewer/master/doc/1.4.0.png"/>
+<img src="https://raw.github.com/markiewb/nb-git-open-in-external-repoviewer/master/doc/1.5.0.png"/>
 
-<p>Currently supported patterns: GitBlit, gitlab.com, bitbucket.org, github.com, code.google.com, GitWeb</p>
+<p>Currently supported patterns: GitBlit, gitlab.com, bitbucket.org, github.com, GitWeb</p>
 
 
 <h2>Updates in 1.5.0:</h2>
 <ul>
 <li>[<a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/37">Feature 37</a>]: Add to editor context menu</li>
+<li>[<a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/39">Task 39</a>]: Remove Google Code support</li>
 </ul>
 
 <h2>Updates in 1.4.2.1:</h2>
@@ -55,7 +56,6 @@ You can configure shortcuts for each action at Tools|Options|Keymap. Filter for 
 <li>[<a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/28">Issue 28</a>]: Open file, open file history and commit diff actions for github.com </li>
 <li>[<a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/pull/32">Issue 32</a>]: Open file, open file history actions for bitbucket (PR by @mkleint)</li>
 <li>[<a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/33">Issue 33</a>]: Migrator for new patterns (<b>NOTE</b>: If you altered the pattern configuration manually in the previous version then the migration cannot be done automatically. You have to reset the configuration in the options and reintroduce your changed manually.)</li>
-
 </ul>
 
 <h2>Updates in 1.4.0.2:</h2>

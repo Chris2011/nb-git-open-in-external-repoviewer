@@ -189,14 +189,15 @@ Following actions are added to the context menu of the editor and its tab:
 &lt;/p&gt;
 You can configure shortcuts for each action at Tools|Options|Keymap. Filter for the actions with the name "* (in browser)" in the category "Git".
 
-&lt;img src="https://raw.github.com/markiewb/nb-git-open-in-external-repoviewer/master/doc/1.4.0.png"/&gt;
+&lt;img src="https://raw.github.com/markiewb/nb-git-open-in-external-repoviewer/master/doc/1.5.0.png"/&gt;
 
-&lt;p&gt;Currently supported patterns: GitBlit, gitlab.com, bitbucket.org, github.com, code.google.com, GitWeb&lt;/p&gt;
+&lt;p&gt;Currently supported patterns: GitBlit, gitlab.com, bitbucket.org, github.com, GitWeb&lt;/p&gt;
 
 
 &lt;h2&gt;Updates in 1.5.0:&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/37"&gt;Feature 37&lt;/a&gt;]: Add to editor context menu&lt;/li&gt;
+&lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/39"&gt;Task 39&lt;/a&gt;]: Remove Google Code support&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2&gt;Updates in 1.4.2.1:&lt;/h2&gt;
@@ -204,7 +205,6 @@ You can configure shortcuts for each action at Tools|Options|Keymap. Filter for 
 &lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/35"&gt;Feature 35&lt;/a&gt;]: Add possibility to add keyboard shortcuts. Configure them at Tools|Options|Keymap&lt;/li&gt;
 &lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/36"&gt;Bugfix 36&lt;/a&gt;]: Fixed: Use configured browser to open links. Configure it at Tools|Options|General|Web Browser&lt;/li&gt;
 &lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/31"&gt;Bugfix 31&lt;/a&gt;]: Fixed: WARNING [org.openide.util.Utilities]: findContextMenuImpl, getPopupPresenter returning null for&lt;/li&gt;
-
 &lt;/ul&gt;
 
 &lt;h2&gt;Updates in 1.4.1.1:&lt;/h2&gt;
@@ -217,7 +217,6 @@ You can configure shortcuts for each action at Tools|Options|Keymap. Filter for 
 &lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/28"&gt;Issue 28&lt;/a&gt;]: Open file, open file history and commit diff actions for github.com &lt;/li&gt;
 &lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/pull/32"&gt;Issue 32&lt;/a&gt;]: Open file, open file history actions for bitbucket (PR by @mkleint)&lt;/li&gt;
 &lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/33"&gt;Issue 33&lt;/a&gt;]: Migrator for new patterns (&lt;b&gt;NOTE&lt;/b&gt;: If you altered the pattern configuration manually in the previous version then the migration cannot be done automatically. You have to reset the configuration in the options and reintroduce your changed manually.)&lt;/li&gt;
-
 &lt;/ul&gt;
 
 &lt;h2&gt;Updates in 1.4.0.2:&lt;/h2&gt;
