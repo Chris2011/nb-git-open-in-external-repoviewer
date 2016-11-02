@@ -4,7 +4,7 @@
 
     <groupId>de.markiewb.netbeans.plugins</groupId>
     <artifactId>open.url.of.git.repository.hoster</artifactId>
-    <version>1.4.2.1</version>
+    <version>1.5.0</version>
     <packaging>nbm</packaging>
 
     <name>Open URL of GIT repository hoster</name>
@@ -181,7 +181,7 @@ Following actions are added to the project context menu:
 &lt;/ul&gt;
 &lt;/p&gt;
 &lt;p&gt;
-Following actions are added to the context menu of the editor tab:
+Following actions are added to the context menu of the editor and its tab:
 &lt;ul&gt;
 &lt;li&gt;"&lt;i&gt;Show file&lt;/i&gt;"&lt;p&gt;Open the current file for the current revision (where implemented: currently gitblit, bitbucket, github, gitlab)&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;"&lt;i&gt;Show file history&lt;/i&gt;"&lt;p&gt;Open the history view of the current file (where implemented: currently gitblit, bitbucket, github, gitlab)&lt;/p&gt;&lt;/li&gt;
@@ -193,6 +193,11 @@ You can configure shortcuts for each action at Tools|Options|Keymap. Filter for 
 
 &lt;p&gt;Currently supported patterns: GitBlit, gitlab.com, bitbucket.org, github.com, code.google.com, GitWeb&lt;/p&gt;
 
+
+&lt;h2&gt;Updates in 1.5.0:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/37"&gt;Feature 37&lt;/a&gt;]: Add to editor context menu&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2&gt;Updates in 1.4.2.1:&lt;/h2&gt;
 &lt;ul&gt;

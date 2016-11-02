@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2015 markiewb.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +28,7 @@ import org.openide.awt.ActionRegistration;
 @ActionRegistration(lazy = false, displayName = "openinexternalviewer.SubMenuActionForEditor")
 @ActionReferences({
     @ActionReference(path = "Editors/TabActions", position = 299),
-    @ActionReference(path="Editors/Popup", position = 5000)
+    @ActionReference(path = "Editors/Popup", position = 1950, separatorBefore = 1949, separatorAfter = 1951)
 })
 public final class SubMenuActionForEditor extends AbstractRepositoryPopupAction {
 

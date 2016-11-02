@@ -20,7 +20,7 @@ Following actions are added to the project context menu:
 </ul>
 </p>
 <p>
-Following actions are added to the context menu of the editor tab:
+Following actions are added to the context menu of the editor and its tab:
 <ul>
 <li>"<i>Show file</i>"<p>Open the current file for the current revision (where implemented: currently gitblit, bitbucket, github, gitlab)</p></li>
 <li>"<i>Show file history</i>"<p>Open the history view of the current file (where implemented: currently gitblit, bitbucket, github, gitlab)</p></li>
@@ -32,6 +32,11 @@ You can configure shortcuts for each action at Tools|Options|Keymap. Filter for 
 
 <p>Currently supported patterns: GitBlit, gitlab.com, bitbucket.org, github.com, code.google.com, GitWeb</p>
 
+
+<h2>Updates in 1.5.0:</h2>
+<ul>
+<li>[<a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/37">Feature 37</a>]: Add to editor context menu</li>
+</ul>
 
 <h2>Updates in 1.4.2.1:</h2>
 <ul>
