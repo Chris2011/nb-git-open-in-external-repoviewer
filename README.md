@@ -16,7 +16,7 @@ Following actions are added to the project context menu:
 <li>"<i>Show log</i>"<p>Open the commit overview/history view for the current branch</p></li>
 <li>"<i>Show commit</i>"<p>Open the commit for the current revision (where implemented)</p></li>
 <li>"<i>Show diff</i>"<p>Open the commit diff for the current revision (where implemented: currently github, gitblit, gitlab)</p></li>
-<li>"<i>Create pull request</i>'<p>Open a website to create a pull request (where implemented: currently bitbucket)</p></li>
+<li>"<i>Create pull request</i>'<p>Open a website to create a pull request (where implemented: currently bitbucket, gitlab)</p></li>
 </ul>
 </p>
 <p>
@@ -32,6 +32,11 @@ You can configure shortcuts for each action at Tools|Options|Keymap. Filter for 
 
 <p>Currently supported patterns: GitBlit, gitlab.com, bitbucket.org, github.com, GitWeb</p>
 
+
+<h2>Updates in 1.6.0:</h2>
+<ul>
+<li>[<a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/40">Feature 40</a>]: Improved Gitlab support / add support for 'Merge request'</li>
+</ul>
 
 <h2>Updates in 1.5.0:</h2>
 <ul>

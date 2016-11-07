@@ -4,7 +4,7 @@
 
     <groupId>de.markiewb.netbeans.plugins</groupId>
     <artifactId>open.url.of.git.repository.hoster</artifactId>
-    <version>1.5.0</version>
+    <version>1.6.0</version>
     <packaging>nbm</packaging>
 
     <name>Open URL of GIT repository hoster</name>
@@ -177,7 +177,7 @@ Following actions are added to the project context menu:
 &lt;li&gt;"&lt;i&gt;Show log&lt;/i&gt;"&lt;p&gt;Open the commit overview/history view for the current branch&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;"&lt;i&gt;Show commit&lt;/i&gt;"&lt;p&gt;Open the commit for the current revision (where implemented)&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;"&lt;i&gt;Show diff&lt;/i&gt;"&lt;p&gt;Open the commit diff for the current revision (where implemented: currently github, gitblit, gitlab)&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;"&lt;i&gt;Create pull request&lt;/i&gt;'&lt;p&gt;Open a website to create a pull request (where implemented: currently bitbucket)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;"&lt;i&gt;Create pull request&lt;/i&gt;'&lt;p&gt;Open a website to create a pull request (where implemented: currently bitbucket, gitlab)&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/p&gt;
 &lt;p&gt;
@@ -193,6 +193,11 @@ You can configure shortcuts for each action at Tools|Options|Keymap. Filter for 
 
 &lt;p&gt;Currently supported patterns: GitBlit, gitlab.com, bitbucket.org, github.com, GitWeb&lt;/p&gt;
 
+
+&lt;h2&gt;Updates in 1.6.0:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;[&lt;a href="https://github.com/markiewb/nb-git-open-in-external-repoviewer/issues/40"&gt;Feature 40&lt;/a&gt;]: Improved Gitlab support / add support for 'Merge request'&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2&gt;Updates in 1.5.0:&lt;/h2&gt;
 &lt;ul&gt;
