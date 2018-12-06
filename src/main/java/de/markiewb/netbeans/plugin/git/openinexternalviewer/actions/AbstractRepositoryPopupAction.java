@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2015 markiewb.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,7 +39,6 @@ import javax.swing.text.JTextComponent;
 import org.netbeans.api.editor.EditorRegistry;
 import org.netbeans.editor.BaseDocument;
 import org.netbeans.libs.git.GitBranch;
-import org.openide.awt.DynamicMenuContent;
 import org.openide.filesystems.FileObject;
 import org.openide.util.Lookup;
 import org.openide.util.Utilities;
@@ -51,7 +50,6 @@ import org.openide.util.actions.Presenter;
  * @author markiewb
  */
 public abstract class AbstractRepositoryPopupAction extends AbstractAction implements ActionListener, Presenter.Popup {
-
     private static final Logger LOG = Logger.getLogger(AbstractRepositoryPopupAction.class.getName());
 
     @Override
@@ -72,14 +70,18 @@ public abstract class AbstractRepositoryPopupAction extends AbstractAction imple
      */
     public JMenu createMenu(final Lookup lookup) {
         RepoStrategyConfig config = detectRepositoryStrategy(lookup);
+
         if (null == config) {
             return null;
         }
+
         JMenu main = new JMenu(config.strategy.getLabel());
         List<JMenuItem> items = createMenuItems(config);
+
         for (JMenuItem item : items) {
             main.add(item);
         }
+
         return main;
     }
 
@@ -87,27 +89,30 @@ public abstract class AbstractRepositoryPopupAction extends AbstractAction imple
     public JMenuItem getPopupPresenter() {
         final Lookup lookup = Utilities.actionsGlobalContext();
         JMenu main = createMenu(lookup);
-        if (null == main) {
-            final JMenuItem invisibleMenuItem = new JMenuItem();
-            invisibleMenuItem.setEnabled(false);
-            invisibleMenuItem.putClientProperty(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
-            return invisibleMenuItem;
+
+        if (null != main) {
+            setEnabled(main.getMenuComponentCount() > 0);
+
+            return main;
         }
 
-        setEnabled(main.getMenuComponentCount() > 0);
-        return main;
+        return null;
     }
 
     protected List<JMenuItem> createMenuItems(RepoStrategyConfig strategyC) {
         if (null == strategyC) {
             return Collections.emptyList();
         }
-        List<JMenuItem> items = new ArrayList<JMenuItem>();
+
+        List<JMenuItem> items = new ArrayList<>();
+
         for (final RepoStrategy.Type type : getSUPPORTEDTYPES()) {
             final String url = strategyC.strategy.getUrl(type, strategyC.remoteURI, strategyC.resolvers);
+
             if (null == url) {
                 continue;
             }
+
             JMenuItem jMenuItem = new JMenuItem(new OpenURLAction(url, type.getLabel()));
             items.add(jMenuItem);
         }
@@ -140,7 +145,7 @@ public abstract class AbstractRepositoryPopupAction extends AbstractAction imple
             final String remoteBranchName = activeBranch.getTrackedBranch().getName();
             //split "origin/master" to "origin" "master"
             //split "orgin/feature/myfeature" to "origin" "feature/myfeature"
-            int indexOf = remoteBranchName.indexOf("/");
+            int indexOf = remoteBranchName.indexOf('/');
             if (indexOf <= 0 || remoteBranchName.startsWith("/") || remoteBranchName.endsWith("/")) {
                 // no slash found OR
                 // slash is the first char? NOGO
@@ -188,39 +193,41 @@ public abstract class AbstractRepositoryPopupAction extends AbstractAction imple
     protected abstract EnumSet<RepoStrategy.Type> getSUPPORTEDTYPES();
 
     protected RepoStrategyConfig getStrategy(String remoteURI, PlaceHolderResolvers resolvers) {
-
         List<String> strategyIds = new Options().getStrategies();
-        List<RepoStrategy> strategies = new ArrayList<RepoStrategy>();
+        List<RepoStrategy> strategies = new ArrayList<>();
+
         for (String strategyId : strategyIds) {
             strategies.add(new AbstractRepoStrategy(strategyId));
         }
 
         for (RepoStrategy strategy : strategies) {
-            boolean supported;
+            boolean supported = false;
+
             try {
                 for (final RepoStrategy.Type type : getSUPPORTEDTYPES()) {
                     supported = null != strategy.getUrl(type, remoteURI, resolvers);
+
                     if (supported) {
                         RepoStrategyConfig config = new RepoStrategyConfig();
+
                         config.remoteURI = remoteURI;
                         config.strategy = strategy;
                         config.resolvers = resolvers;
+
                         return config;
                     }
                 }
             } catch (Exception e) {
                 LOG.warning(String.format("caught exception while calling strategy %s with %s :\n%s", strategy, remoteURI, e));
-                supported = false;
             }
         }
+
         return null;
     }
 
     protected class RepoStrategyConfig {
-
         RepoStrategy strategy;
         String remoteURI;
         PlaceHolderResolvers resolvers;
     }
-
 }

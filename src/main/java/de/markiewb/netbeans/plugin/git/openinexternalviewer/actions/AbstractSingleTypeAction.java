@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2016 markiewb.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,14 +23,8 @@ import java.util.EnumSet;
 import javax.swing.Action;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import org.openide.awt.ActionID;
-import org.openide.awt.ActionRegistration;
 import org.openide.filesystems.FileObject;
-import org.openide.util.Lookup;
-import org.openide.util.NbBundle.Messages;
-import org.openide.util.lookup.InstanceContent;
 import org.openide.util.lookup.Lookups;
-import org.openide.util.lookup.ProxyLookup;
 
 /**
  * Action, which can invoke exactly one {@link RepoStrategy.Type).
@@ -50,20 +44,23 @@ public abstract class AbstractSingleTypeAction implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ev) {
         AbstractRepositoryPopupAction contextMenuCreator = new AbstractRepositoryPopupAction() {
-
             @Override
             protected EnumSet<RepoStrategy.Type> getSUPPORTEDTYPES() {
                 return EnumSet.of(getSupportedType());
             }
         };
+
         // create a context menu for exactly one type
         JMenu menu = contextMenuCreator.createMenu(Lookups.fixed(context));
+
         // if there is one sub menu entry, then call it
         if (null != menu && menu.getMenuComponentCount() > 0) {
             Component component = menu.getMenuComponent(0);
+
             if (component instanceof JMenuItem) {
                 JMenuItem item = (JMenuItem) component;
                 final Action action1 = item.getAction();
+
                 action1.actionPerformed(ev);
             }
         }

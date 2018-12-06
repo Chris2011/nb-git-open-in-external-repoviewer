@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2015 markiewb.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,13 +27,13 @@ import org.openide.util.Exceptions;
  * @author markiewb
  */
 public class OpenURLAction extends AbstractAction {
-
     private final String url;
     public String label;
 
     public OpenURLAction(String url, String label) {
         this.url = url;
         this.label = label;
+
         putValue(NAME, label);
     }
 
@@ -45,5 +45,4 @@ public class OpenURLAction extends AbstractAction {
             Exceptions.printStackTrace(ex);
         }
     }
-
 }

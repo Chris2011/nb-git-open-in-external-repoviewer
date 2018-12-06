@@ -28,15 +28,13 @@ import org.openide.awt.ActionRegistration;
 @ActionRegistration(lazy = false, displayName = "openinexternalviewer.SubMenuActionForEditor")
 @ActionReferences({
     @ActionReference(path = "Editors/TabActions", position = 299),
-    @ActionReference(path = "Editors/Popup", position = 1950, separatorBefore = 1949, separatorAfter = 1951)
+    @ActionReference(path = "Editors/Popup", position = 5000)
 })
 public final class SubMenuActionForEditor extends AbstractRepositoryPopupAction {
-
     private final EnumSet<RepoStrategy.Type> SUPPORTEDTYPES = EnumSet.of(RepoStrategy.Type.SHOW_FILE_HISTORY, RepoStrategy.Type.SHOW_FILE);
 
     @Override
     public EnumSet<Type> getSUPPORTEDTYPES() {
         return SUPPORTEDTYPES;
     }
-
 }
